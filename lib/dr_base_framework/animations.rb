@@ -1,5 +1,20 @@
 module Animations
   class << self
+    def animate(object, to:, duration:)
+      first_frame_values = {}.tap { |frame|
+        to.each_key do |key|
+          frame[key] = object[key]
+        end
+      }
+      animation = build(
+        frames: [
+          first_frame_values.merge!(duration: duration, easing: :linear),
+          to.dup
+        ]
+      )
+      start! object, animation: animation, repeat: false
+    end
+
     def build(frames:, **base)
       {
         base: base,
@@ -64,7 +79,7 @@ module Animations
       next_frame_values = next_frame(animation_state)[:values]
       {}.tap { |values|
         frame[:values].each do |key, value|
-          values[key] = (next_frame_values[key] - value) * factor + value
+          values[key] = ((next_frame_values[key] - value) * factor + value).round
         end
       }
     end

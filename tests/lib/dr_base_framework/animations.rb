@@ -180,6 +180,17 @@ def test_animations_finished_one_time_animation(_args, assert)
   assert.true! Animations.finished? animation_state
 end
 
+def test_animations_animate(_args, assert)
+  primitive = { x: 100 }
+
+  animation_state = Animations.animate(primitive, to: { x: 200 }, duration: 3)
+
+  Animations.next_tick animation_state
+  Animations.apply! primitive, animation_state: animation_state
+
+  assert.equal! primitive, { x: 133 }
+end
+
 module AnimationsTests
   class << self
     def an_animation(length: 6)
