@@ -1,0 +1,8 @@
+.bundle
+Gemfile.lock
+dist
+vendor
+
+# Emacs
+\#*
+*~
