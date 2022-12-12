@@ -37,20 +37,13 @@ module Animations
       frames = animation_state[:animation][:frames]
 
       animation_state[:ticks] += 1
-      if animation_state[:ticks] >= frames[animation_state[:frame_index]][:duration]
-        animation_state[:ticks] = 0
+      return unless animation_state[:ticks] >= frames[animation_state[:frame_index]][:duration]
 
-        if animation_state[:frame_index] < frames.length - 1
-          animation_state[:frame_index] += 1
-          return
-        end
+      animation_state[:ticks] = 0
+      animation_state[:frame_index] = (animation_state[:frame_index] + 1) % frames.length
+      return unless animation_state[:frame_index] == frames.length - 1 && !animation_state[:repeat]
 
-        if animation_state[:repeat]
-          animation_state[:frame_index] = 0
-        else
-          animation_state[:finished] = true
-        end
-      end
+      animation_state[:finished] = true
     end
 
     def current_frame_metadata(animation_state)
