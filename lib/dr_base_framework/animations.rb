@@ -7,7 +7,8 @@ module Animations
           {
             duration: frame[:duration],
             metadata: frame[:metadata],
-            values: frame.except(:duration, :metadata)
+            easing: frame[:easing] || :none,
+            values: frame.except(:duration, :metadata, :easing)
           }
         }
       }
@@ -27,8 +28,7 @@ module Animations
     end
 
     def apply!(primitive, animation_state:)
-      frame = current_frame(animation_state)
-      primitive.merge! frame[:values]
+      primitive.merge! current_frame_values(animation_state)
     end
 
     def next_tick(animation_state)
@@ -56,8 +56,34 @@ module Animations
 
     private
 
+    def current_frame_values(animation_state)
+      frame = current_frame(animation_state)
+      return frame[:values] if frame[:easing] == :none
+
+      factor = Easing.send(frame[:easing], animation_state[:ticks] / frame[:duration])
+      next_frame_values = next_frame(animation_state)[:values]
+      {}.tap { |values|
+        frame[:values].each do |key, value|
+          values[key] = (next_frame_values[key] - value) * factor + value
+        end
+      }
+    end
+
     def current_frame(animation_state)
       animation_state[:animation][:frames][animation_state[:frame_index]]
+    end
+
+    def next_frame(animation_state)
+      frames = animation_state[:animation][:frames]
+      frames[(animation_state[:frame_index] + 1) % frames.length]
+    end
+  end
+
+  module Easing
+    class << self
+      def linear(t)
+        t
+      end
     end
   end
 end

@@ -88,6 +88,33 @@ def test_animations_integration_test_no_repeat(_args, assert)
   assert.equal! primitive, second_frame
 end
 
+def test_animations_integration_test_linear_easing(_args, assert)
+  animation = Animations.build(
+    frames: [
+      { alpha: 0, duration: 3, easing: :linear },
+      { alpha: 255 }
+    ]
+  )
+  primitive = {}
+  animation_state = Animations.start! primitive, animation: animation, repeat: false
+  assert.equal! primitive, { alpha: 0 }
+
+  Animations.next_tick animation_state
+  Animations.apply! primitive, animation_state: animation_state
+
+  assert.equal! primitive, { alpha: 85 }
+
+  Animations.next_tick animation_state
+  Animations.apply! primitive, animation_state: animation_state
+
+  assert.equal! primitive, { alpha: 170 }
+
+  Animations.next_tick animation_state
+  Animations.apply! primitive, animation_state: animation_state
+
+  assert.equal! primitive, { alpha: 255 }
+end
+
 def test_animations_metadata(_args, assert)
   animation = Animations.build(
     frames: [
