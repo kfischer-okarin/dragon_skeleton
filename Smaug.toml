@@ -10,7 +10,11 @@ keywords = []
 # repository = "http://github.com/example/example"
 
 # Which files do you want to be automatically required from your package.
-requires = ["lib/dr_base_framework.rb"]
+requires = [
+  "lib/dr_base_framework/animations.rb",
+  "lib/dr_base_framework/animations/asesprite_json.rb",
+  "lib/dr_base_framework/animated_sprite.rb"
+]
 
 
 [package.installs]
