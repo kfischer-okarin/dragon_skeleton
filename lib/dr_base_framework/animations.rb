@@ -43,9 +43,24 @@ module Animations
       }
     end
 
+    def perform_tick(animation_state)
+      next_tick animation_state
+      apply! animation_state[:target], animation_state: animation_state
+    end
+
     def apply!(target, animation_state:)
       target.merge! current_frame_values(animation_state)
     end
+
+    def current_frame_metadata(animation_state)
+      current_frame(animation_state)[:metadata]
+    end
+
+    def finished?(animation_state)
+      animation_state[:finished]
+    end
+
+    private
 
     def next_tick(animation_state)
       return if finished? animation_state
@@ -61,16 +76,6 @@ module Animations
 
       animation_state[:finished] = true
     end
-
-    def current_frame_metadata(animation_state)
-      current_frame(animation_state)[:metadata]
-    end
-
-    def finished?(animation_state)
-      animation_state[:finished]
-    end
-
-    private
 
     def current_frame_values(animation_state)
       frame = current_frame(animation_state)

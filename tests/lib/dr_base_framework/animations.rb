@@ -24,21 +24,18 @@ def test_animations_integration_test(_args, assert)
   assert.equal! primitive, first_frame
 
   2.times do
-    Animations.next_tick animation_state
-    Animations.apply! primitive, animation_state: animation_state
+    Animations.perform_tick animation_state
 
     assert.equal! primitive, first_frame
   end
 
   3.times do
-    Animations.next_tick animation_state
-    Animations.apply! primitive, animation_state: animation_state
+    Animations.perform_tick animation_state
 
     assert.equal! primitive, second_frame
   end
 
-  Animations.next_tick animation_state
-  Animations.apply! primitive, animation_state: animation_state
+  Animations.perform_tick animation_state
 
   assert.equal! primitive, first_frame
 end
@@ -69,21 +66,18 @@ def test_animations_integration_test_no_repeat(_args, assert)
   assert.equal! primitive, first_frame
 
   2.times do
-    Animations.next_tick animation_state
-    Animations.apply! primitive, animation_state: animation_state
+    Animations.perform_tick animation_state
 
     assert.equal! primitive, first_frame
   end
 
   3.times do
-    Animations.next_tick animation_state
-    Animations.apply! primitive, animation_state: animation_state
+    Animations.perform_tick animation_state
 
     assert.equal! primitive, second_frame
   end
 
-  Animations.next_tick animation_state
-  Animations.apply! primitive, animation_state: animation_state
+  Animations.perform_tick animation_state
 
   assert.equal! primitive, second_frame
 end
@@ -99,18 +93,15 @@ def test_animations_integration_test_linear_easing(_args, assert)
   animation_state = Animations.start! primitive, animation: animation, repeat: false
   assert.equal! primitive, { alpha: 0 }
 
-  Animations.next_tick animation_state
-  Animations.apply! primitive, animation_state: animation_state
+  Animations.perform_tick animation_state
 
   assert.equal! primitive, { alpha: 85 }
 
-  Animations.next_tick animation_state
-  Animations.apply! primitive, animation_state: animation_state
+  Animations.perform_tick animation_state
 
   assert.equal! primitive, { alpha: 170 }
 
-  Animations.next_tick animation_state
-  Animations.apply! primitive, animation_state: animation_state
+  Animations.perform_tick animation_state
 
   assert.equal! primitive, { alpha: 255 }
 end
@@ -129,20 +120,20 @@ def test_animations_metadata(_args, assert)
   assert.equal! Animations.current_frame_metadata(animation_state), { color: :red }
 
   2.times do
-    Animations.next_tick animation_state
+    Animations.perform_tick animation_state
 
     assert.equal! primitive, {}
     assert.equal! Animations.current_frame_metadata(animation_state), { color: :red }
   end
 
   3.times do
-    Animations.next_tick animation_state
+    Animations.perform_tick animation_state
 
     assert.equal! primitive, {}
     assert.equal! Animations.current_frame_metadata(animation_state), { color: :green }
   end
 
-  Animations.next_tick animation_state
+  Animations.perform_tick animation_state
 
   assert.equal! primitive, {}
   assert.equal! Animations.current_frame_metadata(animation_state), { color: :red }
@@ -156,7 +147,7 @@ def test_animations_finished_repeating_animation(_args, assert)
   assert.false! Animations.finished? animation_state
 
   3.times do
-    Animations.next_tick animation_state
+    Animations.perform_tick animation_state
 
     assert.false! Animations.finished? animation_state
   end
@@ -170,12 +161,12 @@ def test_animations_finished_one_time_animation(_args, assert)
   assert.false! Animations.finished? animation_state
 
   2.times do
-    Animations.next_tick animation_state
+    Animations.perform_tick animation_state
 
     assert.false! Animations.finished? animation_state
   end
 
-  Animations.next_tick animation_state
+  Animations.perform_tick animation_state
 
   assert.true! Animations.finished? animation_state
 end
@@ -185,8 +176,7 @@ def test_animations_animate(_args, assert)
 
   animation_state = Animations.animate(primitive, to: { x: 200 }, duration: 3)
 
-  Animations.next_tick animation_state
-  Animations.apply! primitive, animation_state: animation_state
+  Animations.perform_tick animation_state
 
   assert.equal! primitive, { x: 133 }
 end

@@ -9,8 +9,7 @@ module AnimatedSprite
 
     def update!(animated_sprite, animation:)
       if animation == animated_sprite[:animation]
-        Animations.next_tick animated_sprite[:animation_state]
-        Animations.apply! animated_sprite, animation_state: animated_sprite[:animation_state]
+        Animations.perform_tick animated_sprite[:animation_state]
       else
         animated_sprite[:animation_state] = Animations.start!(
           animated_sprite,
