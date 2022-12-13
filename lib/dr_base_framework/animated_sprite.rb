@@ -7,7 +7,7 @@ module AnimatedSprite
       )
     end
 
-    def update!(animated_sprite, animation:)
+    def perform_tick(animated_sprite, animation:)
       if animation == animated_sprite[:animation]
         Animations.perform_tick animated_sprite[:animation_state]
       else

@@ -21,16 +21,16 @@ def test_animated_sprite_integration_test(_args, assert)
   assert.equal! animated_sprite[:primitive_marker], :sprite
 
   2.times do
-    AnimatedSprite.update! animated_sprite, animation: :a
+    AnimatedSprite.perform_tick animated_sprite, animation: :a
     assert.equal! animated_sprite.slice(:w, :h, :tile_x, :tile_y),
                   { w: 48, h: 48, tile_x: 0, tile_y: 0 }
   end
 
-  AnimatedSprite.update! animated_sprite, animation: :a
+  AnimatedSprite.perform_tick animated_sprite, animation: :a
   assert.equal! animated_sprite.slice(:w, :h, :tile_x, :tile_y),
                 { w: 48, h: 48, tile_x: 48, tile_y: 48 }
 
-  AnimatedSprite.update! animated_sprite, animation: :b
+  AnimatedSprite.perform_tick animated_sprite, animation: :b
   assert.equal! animated_sprite.slice(:w, :h, :tile_x, :tile_y, :next_animation),
                 { w: 96, h: 96, tile_x: 0, tile_y: 0 }
 end
