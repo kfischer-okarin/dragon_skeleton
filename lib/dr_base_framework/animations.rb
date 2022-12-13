@@ -29,21 +29,22 @@ module Animations
       }
     end
 
-    def start!(primitive, animation:, repeat: true)
+    def start!(target, animation:, repeat: true)
       {
         animation: animation,
+        target: target,
         frame_index: 0,
         ticks: 0,
         repeat: repeat,
         finished: false
       }.tap { |animation_state|
-        primitive.merge! animation[:base]
-        apply! primitive, animation_state: animation_state
+        target.merge! animation[:base]
+        apply! target, animation_state: animation_state
       }
     end
 
-    def apply!(primitive, animation_state:)
-      primitive.merge! current_frame_values(animation_state)
+    def apply!(target, animation_state:)
+      target.merge! current_frame_values(animation_state)
     end
 
     def next_tick(animation_state)
