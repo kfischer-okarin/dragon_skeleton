@@ -1,7 +1,7 @@
 [package]
 name = "dr_base_framework"
 authors = ["Kevin Fischer <kfischer_okarin@yahoo.co.jp>"]
-version = "0.1.0"
+version = "2022.12.13"
 homepage = "https://github.com/kfischer-okarin/dr_base_framework"
 keywords = []
 
