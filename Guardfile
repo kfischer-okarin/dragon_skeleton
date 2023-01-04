@@ -40,7 +40,6 @@ end
 
 def run_dragonruby_tests(path)
   envs = 'SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy'
-  p "#{envs} #{dragonruby_path} #{APP_ROOT} --test #{Pathname.new(path).relative_path_from(APP_ROOT)}"
   system "#{envs} #{dragonruby_path} #{APP_ROOT} --test #{Pathname.new(path).relative_path_from(APP_ROOT)}"
 end
 
