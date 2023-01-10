@@ -1,8 +1,8 @@
 module DragonSkeleton
-  module Animations
+  module FileFormats
     module AsespriteJson
       class << self
-        def read(path)
+        def read_as_animations(path)
           sprite_sheet_data = deep_symbolize_keys! $gtk.parse_json_file(path)
 
           base = build_base(sprite_sheet_data, path)

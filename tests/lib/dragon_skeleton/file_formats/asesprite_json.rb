@@ -1,7 +1,7 @@
 DragonSkeleton.add_to_top_level_namespace
 
-def test_animations_asesprite_json_read(_args, assert)
-  animations = Animations::AsespriteJson.read 'tests/resources/character.json'
+def test_file_formats_asesprite_json_read_as_animations(_args, assert)
+  animations = FileFormats::AsespriteJson.read_as_animations 'tests/resources/character.json'
   expected_animations = {
     idle_right: Animations.build(
       w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'tests/resources/character.png',
@@ -47,7 +47,7 @@ def test_animations_asesprite_json_read(_args, assert)
   assert.equal! animations, expected_animations
 end
 
-def test_animations_asesprite_json_flipped_horizontally(_args, assert)
+def test_file_formats_asesprite_json_flipped_horizontally(_args, assert)
   animation = Animations.build(
     w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'tests/resources/character.png',
     flip_horizontally: false,
@@ -59,8 +59,8 @@ def test_animations_asesprite_json_flipped_horizontally(_args, assert)
       }
     ]
   )
-  flipped_animation = Animations::AsespriteJson.flipped_horizontally animation
-  flipped_twice_animation = Animations::AsespriteJson.flipped_horizontally flipped_animation
+  flipped_animation = FileFormats::AsespriteJson.flipped_horizontally animation
+  flipped_twice_animation = FileFormats::AsespriteJson.flipped_horizontally flipped_animation
 
   sprite1 = {}
   sprite2 = {}
@@ -73,7 +73,7 @@ def test_animations_asesprite_json_flipped_horizontally(_args, assert)
   assert.equal! sprite3.flip_horizontally, !sprite2.flip_horizontally, "Flipping twice didn't work"
 end
 
-def test_animations_asesprite_json_flipped_horizontally_slices(_args, assert)
+def test_file_formats_asesprite_json_flipped_horizontally_slices(_args, assert)
   animation = Animations.build(
     w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'tests/resources/character.png',
     flip_horizontally: false,
@@ -89,8 +89,8 @@ def test_animations_asesprite_json_flipped_horizontally_slices(_args, assert)
       }
     ]
   )
-  flipped_animation = Animations::AsespriteJson.flipped_horizontally animation
-  flipped_twice_animation = Animations::AsespriteJson.flipped_horizontally flipped_animation
+  flipped_animation = FileFormats::AsespriteJson.flipped_horizontally animation
+  flipped_twice_animation = FileFormats::AsespriteJson.flipped_horizontally flipped_animation
   flipped_state = Animations.start!({}, animation: flipped_animation)
   flipped_twice_state = Animations.start!({}, animation: flipped_twice_animation)
 
@@ -113,8 +113,8 @@ def test_animations_asesprite_json_flipped_horizontally_slices(_args, assert)
                 "Slices weren't flipped back"
 end
 
-def test_animations_asesprite_json_pingpong(_args, assert)
-  animations = Animations::AsespriteJson.read 'tests/resources/character_pingpong.json'
+def test_file_formats_asesprite_json_pingpong(_args, assert)
+  animations = FileFormats::AsespriteJson.read_as_animations 'tests/resources/character_pingpong.json'
   expected_animations = {
     anim: Animations.build(
       w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'tests/resources/character.png',

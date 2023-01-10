@@ -12,8 +12,8 @@ keywords = []
 # Which files do you want to be automatically required from your package.
 requires = [
   "lib/dragon_skeleton/animations.rb",
-  "lib/dragon_skeleton/animations/asesprite_json.rb",
-  "lib/dragon_skeleton/animated_sprite.rb"
+  "lib/dragon_skeleton/animated_sprite.rb",
+  "lib/dragon_skeleton/file_formats/asesprite_json.rb"
 ]
 
 
