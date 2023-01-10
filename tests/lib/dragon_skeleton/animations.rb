@@ -1,3 +1,5 @@
+DragonSkeleton.add_to_top_level_namespace
+
 def test_animations_integration_test(_args, assert)
   animation = Animations.build(
     w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'resources/character.png',

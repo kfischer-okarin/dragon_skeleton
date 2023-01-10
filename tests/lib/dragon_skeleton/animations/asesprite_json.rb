@@ -1,3 +1,5 @@
+DragonSkeleton.add_to_top_level_namespace
+
 def test_animations_asesprite_json_read(_args, assert)
   animations = Animations::AsespriteJson.read 'tests/resources/character.json'
   expected_animations = {

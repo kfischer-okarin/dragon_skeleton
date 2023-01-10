@@ -1,3 +1,5 @@
+DragonSkeleton.add_to_top_level_namespace
+
 def test_animated_sprite_integration_test(_args, assert)
   animation_a = Animations.build(
     w: 48, h: 48,
