@@ -1,8 +1,8 @@
 [package]
-name = "dr_base_framework"
+name = "dragon_skeleton"
 authors = ["Kevin Fischer <kfischer_okarin@yahoo.co.jp>"]
 version = "2022.12.13"
-homepage = "https://github.com/kfischer-okarin/dr_base_framework"
+homepage = "https://github.com/kfischer-okarin/dragon_skeleton"
 keywords = []
 
 # Optional:
@@ -11,9 +11,9 @@ keywords = []
 
 # Which files do you want to be automatically required from your package.
 requires = [
-  "lib/dr_base_framework/animations.rb",
-  "lib/dr_base_framework/animations/asesprite_json.rb",
-  "lib/dr_base_framework/animated_sprite.rb"
+  "lib/dragon_skeleton/animations.rb",
+  "lib/dragon_skeleton/animations/asesprite_json.rb",
+  "lib/dragon_skeleton/animated_sprite.rb"
 ]
 
 

@@ -1,6 +1,6 @@
-require 'lib/dr_base_framework/animations.rb'
-require 'lib/dr_base_framework/animations/asesprite_json.rb'
-require 'lib/dr_base_framework/animated_sprite.rb'
+require 'lib/dragon_skeleton/animations.rb'
+require 'lib/dragon_skeleton/animations/asesprite_json.rb'
+require 'lib/dragon_skeleton/animated_sprite.rb'
 
 
 # Placeholder file for unit tests
