@@ -2,13 +2,12 @@ module DragonSkeleton
   module FileFormats
     module AsespriteJson
       class << self
-        def read_as_animations(path)
-          sprite_sheet_data = deep_symbolize_keys! $gtk.parse_json_file(path)
+        def read_as_animations(asesprite_json_path)
+          sprite_sheet_data = deep_symbolize_keys! $gtk.parse_json_file(asesprite_json_path)
 
-          base = build_base(sprite_sheet_data, path)
+          path = sprite_path(sprite_sheet_data, asesprite_json_path)
 
           {}.tap { |result|
-            frame_size = base.slice(:w, :h)
             frames = sprite_sheet_data.fetch :frames
             slices_data = sprite_sheet_data.fetch(:meta).fetch :slices
 
@@ -19,46 +18,48 @@ module DragonSkeleton
                 frame_data = frames[frame_index]
                 frame = frame_data.fetch(:frame)
                 {
+                  path: path,
+                  w: frame[:w],
+                  h: frame[:h],
                   tile_x: frame[:x],
                   tile_y: frame[:y],
+                  tile_w: frame[:w],
+                  tile_h: frame[:h],
+                  flip_horizontally: false,
                   duration: frame_data.fetch(:duration).idiv(50) * 3, # 50ms = 3 ticks
                   metadata: {
-                    slices: slice_bounds_for_frame(slices_data, frame_index, frame_size)
+                    slices: slice_bounds_for_frame(slices_data, frame_index, frame.slice(:w, :h))
                   }
                 }
               }
               apply_animation_direction! tag_frames, frame_tag_data.fetch(:direction)
-              result[tag.to_sym] = Animations.build(
-                frames: tag_frames,
-                **base
-              )
+              result[tag.to_sym] = Animations.build(frames: tag_frames)
             end
           }
         end
 
         def flipped_horizontally(animation)
           {
-            base: animation[:base].merge(flip_horizontally: !animation[:base][:flip_horizontally]),
+            base: {},
             frames: animation[:frames].map { |frame|
-              flip_slices(frame, frame_width: animation[:base][:w])
+              values = frame[:values]
+              frame.merge(
+                values: values.merge(flip_horizontally: !values[:flip_horizontally]),
+                metadata: {
+                  slices: frame[:metadata][:slices].transform_values { |bounds|
+                    bounds.merge(x: values[:w] - bounds[:x] - bounds[:w])
+                  }
+                }
+              )
             }
           }
         end
 
         private
 
-        def build_base(sprite_sheet_data, path)
-          frames = sprite_sheet_data.fetch :frames
-          first_frame = frames.first.fetch :frame
-          last_slash_index = path.rindex '/'
-          {
-            w: first_frame[:w],
-            h: first_frame[:h],
-            tile_w: first_frame[:w],
-            tile_h: first_frame[:h],
-            flip_horizontally: false,
-            path: path[0..last_slash_index] + sprite_sheet_data.fetch(:meta).fetch(:image)
-          }
+        def sprite_path(sprite_sheet_data, asesprite_json_path)
+          last_slash_index = asesprite_json_path.rindex '/'
+          asesprite_json_path[0..last_slash_index] + sprite_sheet_data.fetch(:meta).fetch(:image)
         end
 
         def slice_bounds_for_frame(slices_data, frame_index, frame_size)

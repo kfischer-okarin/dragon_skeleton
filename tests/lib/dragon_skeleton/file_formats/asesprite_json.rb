@@ -4,11 +4,12 @@ def test_file_formats_asesprite_json_read_as_animations(_args, assert)
   animations = FileFormats::AsespriteJson.read_as_animations 'tests/resources/character.json'
   expected_animations = {
     idle_right: Animations.build(
-      w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'tests/resources/character.png',
-      flip_horizontally: false,
       frames: [
         {
-          tile_x: 0, tile_y: 0,
+          path: 'tests/resources/character.png',
+          w: 48, h: 48,
+          tile_x: 0, tile_y: 0, tile_w: 48, tile_h: 48,
+          flip_horizontally: false,
           duration: 6,
           metadata: {
             slices: {
@@ -19,11 +20,12 @@ def test_file_formats_asesprite_json_read_as_animations(_args, assert)
       ]
     ),
     walk_right: Animations.build(
-      w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'tests/resources/character.png',
-      flip_horizontally: false,
       frames: [
         {
-          tile_x: 48, tile_y: 0,
+          path: 'tests/resources/character.png',
+          w: 48, h: 48,
+          tile_x: 48, tile_y: 0, tile_w: 48, tile_h: 48,
+          flip_horizontally: false,
           duration: 3,
           metadata: {
             slices: {
@@ -32,7 +34,10 @@ def test_file_formats_asesprite_json_read_as_animations(_args, assert)
           }
         },
         {
-          tile_x: 96, tile_y: 0,
+          path: 'tests/resources/character.png',
+          w: 48, h: 48,
+          tile_x: 96, tile_y: 0, tile_w: 48, tile_h: 48,
+          flip_horizontally: false,
           duration: 9,
           metadata: {
             slices: {
@@ -49,11 +54,12 @@ end
 
 def test_file_formats_asesprite_json_flipped_horizontally(_args, assert)
   animation = Animations.build(
-    w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'tests/resources/character.png',
-    flip_horizontally: false,
     frames: [
       {
-        tile_x: 0, tile_y: 0,
+        path: 'tests/resources/character.png',
+        w: 48, h: 48,
+        tile_x: 0, tile_y: 0, tile_w: 48, tile_h: 48,
+        flip_horizontally: false,
         duration: 6,
         metadata: { slices: {} }
       }
@@ -75,11 +81,12 @@ end
 
 def test_file_formats_asesprite_json_flipped_horizontally_slices(_args, assert)
   animation = Animations.build(
-    w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'tests/resources/character.png',
-    flip_horizontally: false,
     frames: [
       {
-        tile_x: 0, tile_y: 0,
+        path: 'tests/resources/character.png',
+        w: 48, h: 48,
+        tile_x: 0, tile_y: 0, tile_w: 48, tile_h: 48,
+        flip_horizontally: false,
         duration: 6,
         metadata: {
           slices: {
@@ -117,32 +124,42 @@ def test_file_formats_asesprite_json_pingpong(_args, assert)
   animations = FileFormats::AsespriteJson.read_as_animations 'tests/resources/character_pingpong.json'
   expected_animations = {
     anim: Animations.build(
-      w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'tests/resources/character.png',
-      flip_horizontally: false,
       frames: [
         {
-          tile_x: 0, tile_y: 0,
+          path: 'tests/resources/character.png',
+          w: 48, h: 48,
+          tile_x: 0, tile_y: 0, tile_w: 48, tile_h: 48,
+          flip_horizontally: false,
           duration: 3,
           metadata: {
             slices: {}
           }
         },
         {
-          tile_x: 48, tile_y: 0,
+          path: 'tests/resources/character.png',
+          w: 48, h: 48,
+          tile_x: 48, tile_y: 0, tile_w: 48, tile_h: 48,
+          flip_horizontally: false,
           duration: 3,
           metadata: {
             slices: {}
           }
         },
         {
-          tile_x: 96, tile_y: 0,
+          path: 'tests/resources/character.png',
+          w: 48, h: 48,
+          tile_x: 96, tile_y: 0, tile_w: 48, tile_h: 48,
+          flip_horizontally: false,
           duration: 3,
           metadata: {
             slices: {}
           }
         },
         {
-          tile_x: 48, tile_y: 0,
+          path: 'tests/resources/character.png',
+          w: 48, h: 48,
+          tile_x: 48, tile_y: 0, tile_w: 48, tile_h: 48,
+          flip_horizontally: false,
           duration: 3,
           metadata: {
             slices: {}
