@@ -4,10 +4,10 @@ module DragonSkeleton
       class << self
         # Reads an Aseprite Spritesheet JSON data file and returns a hash of animations.
         # The JSON file must have been exported as Array with Tags and Slices enabled.
-        def read_as_animations(asesprite_json_path)
-          sprite_sheet_data = deep_symbolize_keys! $gtk.parse_json_file(asesprite_json_path)
+        def read_as_animations(json_path)
+          sprite_sheet_data = deep_symbolize_keys! $gtk.parse_json_file(json_path)
 
-          path = sprite_path(sprite_sheet_data, asesprite_json_path)
+          path = sprite_path(sprite_sheet_data, json_path)
 
           {}.tap { |result|
             frames = sprite_sheet_data.fetch :frames
@@ -58,9 +58,9 @@ module DragonSkeleton
 
         private
 
-        def sprite_path(sprite_sheet_data, asesprite_json_path)
-          last_slash_index = asesprite_json_path.rindex '/'
-          asesprite_json_path[0..last_slash_index] + sprite_sheet_data.fetch(:meta).fetch(:image)
+        def sprite_path(sprite_sheet_data, json_path)
+          last_slash_index = json_path.rindex '/'
+          json_path[0..last_slash_index] + sprite_sheet_data.fetch(:meta).fetch(:image)
         end
 
         def slice_bounds_for_frame(slices_data, frame_index, frame_size)
