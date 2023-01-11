@@ -49,6 +49,8 @@ module DragonSkeleton
           }
         end
 
+        # Returns a new animation with all frames (and associated slices) flipped
+        # horizontally.
         def flip_animation_horizontally(animation)
           {
             frames: animation[:frames].map { |frame|
