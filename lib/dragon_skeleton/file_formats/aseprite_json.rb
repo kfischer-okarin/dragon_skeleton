@@ -49,7 +49,7 @@ module DragonSkeleton
           }
         end
 
-        def flipped_horizontally(animation)
+        def flip_animation_horizontally(animation)
           {
             frames: animation[:frames].map { |frame|
               values = frame[:values]

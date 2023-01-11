@@ -52,7 +52,7 @@ def test_file_formats_aseprite_json_read_as_animations(_args, assert)
   assert.equal! animations, expected_animations
 end
 
-def test_file_formats_aseprite_json_flipped_horizontally(_args, assert)
+def test_file_formats_aseprite_json_flip_animation_horizontally(_args, assert)
   animation = Animations.build(
     frames: [
       {
@@ -65,8 +65,8 @@ def test_file_formats_aseprite_json_flipped_horizontally(_args, assert)
       }
     ]
   )
-  flipped_animation = FileFormats::AsepriteJson.flipped_horizontally animation
-  flipped_twice_animation = FileFormats::AsepriteJson.flipped_horizontally flipped_animation
+  flipped_animation = FileFormats::AsepriteJson.flip_animation_horizontally animation
+  flipped_twice_animation = FileFormats::AsepriteJson.flip_animation_horizontally flipped_animation
 
   sprite1 = {}
   sprite2 = {}
@@ -79,7 +79,7 @@ def test_file_formats_aseprite_json_flipped_horizontally(_args, assert)
   assert.equal! sprite3.flip_horizontally, !sprite2.flip_horizontally, "Flipping twice didn't work"
 end
 
-def test_file_formats_aseprite_json_flipped_horizontally_slices(_args, assert)
+def test_file_formats_aseprite_json_flip_animation_horizontally_slices(_args, assert)
   animation = Animations.build(
     frames: [
       {
@@ -96,8 +96,8 @@ def test_file_formats_aseprite_json_flipped_horizontally_slices(_args, assert)
       }
     ]
   )
-  flipped_animation = FileFormats::AsepriteJson.flipped_horizontally animation
-  flipped_twice_animation = FileFormats::AsepriteJson.flipped_horizontally flipped_animation
+  flipped_animation = FileFormats::AsepriteJson.flip_animation_horizontally animation
+  flipped_twice_animation = FileFormats::AsepriteJson.flip_animation_horizontally flipped_animation
   flipped_state = Animations.start!({}, animation: flipped_animation)
   flipped_twice_state = Animations.start!({}, animation: flipped_twice_animation)
 
