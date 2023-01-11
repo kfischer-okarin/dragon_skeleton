@@ -2,13 +2,12 @@ DragonSkeleton.add_to_top_level_namespace
 
 def test_animations_integration_test(_args, assert)
   animation = Animations.build(
-    w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'resources/character.png',
     frames: [
       { tile_x: 0, tile_y: 0, duration: 3 },
       { tile_x: 48, tile_y: 48, duration: 3 }
     ]
   )
-  primitive = { x: 100, y: 100 }
+  primitive = { x: 100, y: 100, w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'resources/character.png' }
   first_frame = {
     x: 100, y: 100,
     w: 48, h: 48,
@@ -44,13 +43,12 @@ end
 
 def test_animations_integration_test_no_repeat(_args, assert)
   animation = Animations.build(
-    w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'resources/character.png',
     frames: [
       { tile_x: 0, tile_y: 0, duration: 3 },
       { tile_x: 48, tile_y: 48 }
     ]
   )
-  primitive = { x: 100, y: 100 }
+  primitive = { x: 100, y: 100, w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'resources/character.png',}
   first_frame = {
     x: 100, y: 100,
     w: 48, h: 48,
@@ -187,7 +185,6 @@ module AnimationsTests
   class << self
     def an_animation(length: 6)
       Animations.build(
-        w: 48, h: 48, tile_w: 48, tile_h: 48, path: 'resources/character.png',
         frames: [
           { tile_x: 0, tile_y: 0, duration: length }
         ]
