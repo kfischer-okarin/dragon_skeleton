@@ -93,16 +93,6 @@ module DragonSkeleton
           end
         end
 
-        def flip_slices(frame, frame_width:)
-          frame.merge(
-            metadata: {
-              slices: frame[:metadata][:slices].transform_values { |bounds|
-                bounds.merge(x: frame_width - bounds[:x] - bounds[:w])
-              }
-            }
-          )
-        end
-
         def deep_symbolize_keys!(value)
           case value
           when Hash
