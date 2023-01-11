@@ -47,10 +47,6 @@ module DragonSkeleton
         apply! animation_state[:target], animation_state: animation_state
       end
 
-      def apply!(target, animation_state:)
-        target.merge! current_frame_values(animation_state)
-      end
-
       def current_frame_metadata(animation_state)
         current_frame(animation_state)[:metadata]
       end
@@ -74,6 +70,10 @@ module DragonSkeleton
         return unless animation_state[:frame_index] == frames.length - 1 && !animation_state[:repeat]
 
         animation_state[:finished] = true
+      end
+
+      def apply!(target, animation_state:)
+        target.merge! current_frame_values(animation_state)
       end
 
       def current_frame_values(animation_state)
