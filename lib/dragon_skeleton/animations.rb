@@ -38,13 +38,13 @@ module DragonSkeleton
           repeat: repeat,
           finished: false
         }.tap { |animation_state|
-          apply! target, animation_state: animation_state
+          update_target animation_state
         }
       end
 
       def perform_tick(animation_state)
         next_tick animation_state
-        apply! animation_state[:target], animation_state: animation_state
+        update_target animation_state
       end
 
       def current_frame_metadata(animation_state)
@@ -72,8 +72,8 @@ module DragonSkeleton
         animation_state[:finished] = true
       end
 
-      def apply!(target, animation_state:)
-        target.merge! current_frame_values(animation_state)
+      def update_target(animation_state)
+        animation_state[:target].merge! current_frame_values(animation_state)
       end
 
       def current_frame_values(animation_state)
