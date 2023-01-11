@@ -1,6 +1,41 @@
 module DragonSkeleton
+  # Provides a simple functional style animation system.
+  #
+  # In the simplest case, a frame is a hash of values to be set on the target and a
+  # duration:
+  #
+  #   animation = Animations.build(
+  #     frames: [
+  #       { tile_x: 0, tile_y: 0, duration: 5 },
+  #       { tile_x: 32, tile_y: 0, duration: 5 }
+  #     ]
+  #   )
+  #
+  # It can then be started via ::start! on a target (e.g. a sprite):
+  #
+  #   sprite = { x: 100, y: 100, w: 32, h: 32, tile_w: 32, tile_h: 32, path: 'resources/character.png' }
+  #   animation_state = Animations.start! sprite, animation: animation
+  #
+  # and every tick you need to call ::perform_tick to advance the animation:
+  #
+  #   Animations.perform_tick animation_state
+  #
+  # By default the animation will stay on a frame until the duration is reached,
+  # then immediately move to the next frame but you can also specify an easing
+  # function to gradually interpolate between frames:
+  #
+  #   animation = Animations.build(
+  #     frames: [
+  #       { x: 0, y: 0, duration: 5, easing: :linear },
+  #       { x: 100, tile_y: 100, duration: 5, easing: :linear }
+  #     ]
+  #   )
   module Animations
     class << self
+      # Creates and starts a one-time animation that will interpolate between
+      # the current values of the target and the values in the +to+ hash.
+      #
+      # Returns an animation state that can be passed to ::perform_tick.
       def lerp(object, to:, duration:)
         first_frame_values = {}.tap { |frame|
           to.each_key do |key|
@@ -16,6 +51,28 @@ module DragonSkeleton
         start! object, animation: animation, repeat: false
       end
 
+      # Builds an animation from a list of frames.
+      #
+      # Each frame is a hash of values that will be set on
+      # the target when the frame becomes active except for
+      # the following reserved keys:
+      #
+      # [:duration] The number of ticks the frame will be active for.
+      #
+      #             This value is required except for the last frame
+      #             of a non-repeating animation.
+      #
+      # [:metadata] A hash of metadata that is available via
+      #             ::current_frame_metadata when the frame is active.
+      #
+      # [:easing] The easing function to use when interpolating between
+      #           the current and next frame.
+      #
+      #           Allowed values are:
+      #
+      #           [:none (default)] No easing, the value will be set immediately once the frame becomes active.
+      #
+      #           [:linear] Linear interpolation between the current values and the values of the next frame.
       def build(frames:)
         {
           frames: frames.map { |frame|
@@ -29,6 +86,11 @@ module DragonSkeleton
         }
       end
 
+      # Starts an animation on a target and returns an animation state which can be
+      # used to advance the animation via ::perform_tick.
+      #
+      # By default the animation will repeat indefinitely but this can be disabled
+      # by setting <code>repeat: false</code>.
       def start!(target, animation:, repeat: true)
         {
           animation: animation,
@@ -42,15 +104,18 @@ module DragonSkeleton
         }
       end
 
+      # Advances the animation by one tick.
       def perform_tick(animation_state)
         next_tick animation_state
         update_target animation_state
       end
 
+      # Returns the metadata associated with the active frame of the animation.
       def current_frame_metadata(animation_state)
         current_frame(animation_state)[:metadata]
       end
 
+      # Returns +true+ if the animation has finished.
       def finished?(animation_state)
         animation_state[:finished]
       end
