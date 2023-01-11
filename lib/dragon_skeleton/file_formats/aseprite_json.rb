@@ -2,8 +2,15 @@ module DragonSkeleton
   module FileFormats
     module AsepriteJson
       class << self
-        # Reads an Aseprite Spritesheet JSON data file and returns a hash of animations.
-        # The JSON file must have been exported as Array with Tags and Slices enabled.
+        # Reads an Aseprite Spritesheet JSON data file and returns a hash of
+        # animations which can be used with the Animations or AnimatedSprite
+        # modules.
+        #
+        # Each tag will be converted to an animation, the symbolized tag name will be
+        # used as the key in the returned hash.
+        #
+        # The JSON file must have been exported as *Array* with *Tags* and *Slices*
+        # enabled.
         def read_as_animations(json_path)
           sprite_sheet_data = deep_symbolize_keys! $gtk.parse_json_file(json_path)
 
