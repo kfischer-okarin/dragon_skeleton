@@ -16,9 +16,8 @@ module DragonSkeleton
         start! object, animation: animation, repeat: false
       end
 
-      def build(frames:, **base)
+      def build(frames:)
         {
-          base: base,
           frames: frames.map { |frame|
             {
               duration: frame[:duration],
@@ -39,7 +38,6 @@ module DragonSkeleton
           repeat: repeat,
           finished: false
         }.tap { |animation_state|
-          target.merge! animation[:base]
           apply! target, animation_state: animation_state
         }
       end

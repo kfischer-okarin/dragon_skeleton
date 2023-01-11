@@ -40,7 +40,6 @@ module DragonSkeleton
 
         def flipped_horizontally(animation)
           {
-            base: {},
             frames: animation[:frames].map { |frame|
               values = frame[:values]
               frame.merge(
