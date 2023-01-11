@@ -9,6 +9,8 @@ module DragonSkeleton
         # Each tag will be converted to an animation, the symbolized tag name will be
         # used as the key in the returned hash.
         #
+        # Frame durations will be rounded down to the nearest 3 ticks (50ms).
+        #
         # The JSON file must have been exported as *Array* with *Tags* and *Slices*
         # enabled.
         def read_as_animations(json_path)
