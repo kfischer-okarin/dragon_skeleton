@@ -36,10 +36,10 @@ module DragonSkeleton
       # the current values of the target and the values in the +to+ hash.
       #
       # Returns an animation state that can be passed to ::perform_tick.
-      def lerp(object, to:, duration:)
+      def lerp(target, to:, duration:)
         first_frame_values = {}.tap { |frame|
           to.each_key do |key|
-            frame[key] = object[key]
+            frame[key] = target[key]
           end
         }
         animation = build(
@@ -48,7 +48,7 @@ module DragonSkeleton
             to.dup
           ]
         )
-        start! object, animation: animation, repeat: false
+        start! target, animation: animation, repeat: false
       end
 
       # Builds an animation from a list of frames.
