@@ -52,6 +52,55 @@ def test_file_formats_aseprite_json_read_as_animations(_args, assert)
   assert.equal! animations, expected_animations
 end
 
+def test_file_formats_aseprite_json_read_as_sprites(_args, assert)
+  sprites = FileFormats::AsepriteJson.read_as_sprites 'tests/resources/character.json'
+  expected_sprites = {
+    idle_right: {
+      primitive_marker: :sprite,
+      path: 'tests/resources/character.png',
+      w: 48, h: 48,
+      tile_x: 0, tile_y: 0, tile_w: 48, tile_h: 48,
+      flip_horizontally: false,
+      duration: 6,
+      metadata: {
+        slices: {
+          collider: { x: 5, y: 0, w: 20, h: 20 }
+        }
+      }
+    },
+    walk_right: [
+      {
+        primitive_marker: :sprite,
+        path: 'tests/resources/character.png',
+        w: 48, h: 48,
+        tile_x: 48, tile_y: 0, tile_w: 48, tile_h: 48,
+        flip_horizontally: false,
+        duration: 3,
+        metadata: {
+          slices: {
+            collider: { x: 6, y: 0, w: 22, h: 20 }
+          }
+        }
+      },
+      {
+        primitive_marker: :sprite,
+        path: 'tests/resources/character.png',
+        w: 48, h: 48,
+        tile_x: 96, tile_y: 0, tile_w: 48, tile_h: 48,
+        flip_horizontally: false,
+        duration: 9,
+        metadata: {
+          slices: {
+            collider: { x: 6, y: 0, w: 22, h: 20 }
+          }
+        }
+      }
+    ]
+  }
+
+  assert.equal! sprites, expected_sprites
+end
+
 def test_file_formats_aseprite_json_flip_animation_horizontally(_args, assert)
   animation = Animations.build(
     frames: [

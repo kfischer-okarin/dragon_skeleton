@@ -50,6 +50,20 @@ module DragonSkeleton
           }
         end
 
+        # Reads an Aseprite Spritesheet JSON data file and returns a hash of sprites.
+        #
+        # If a tag has only one frame, the sprite will be returned directly, otherwise an
+        # array of sprites will be returned.
+        def read_as_sprites(json_path)
+          animations = read_as_animations json_path
+          animations.transform_values { |animation|
+            sprites = animation[:frames].map { |frame|
+              frame[:values].to_sprite(frame.slice(:duration, :metadata))
+            }
+            sprites.length == 1 ? sprites.first : sprites
+          }
+        end
+
         # Returns a new animation with all frames (and associated slices) flipped
         # horizontally.
         def flip_animation_horizontally(animation)
