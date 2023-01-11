@@ -171,10 +171,10 @@ def test_animations_finished_one_time_animation(_args, assert)
   assert.true! Animations.finished? animation_state
 end
 
-def test_animations_animate(_args, assert)
+def test_animations_lerp(_args, assert)
   primitive = { x: 100 }
 
-  animation_state = Animations.animate(primitive, to: { x: 200 }, duration: 3)
+  animation_state = Animations.lerp(primitive, to: { x: 200 }, duration: 3)
 
   Animations.perform_tick animation_state
 

@@ -1,7 +1,7 @@
 module DragonSkeleton
   module Animations
     class << self
-      def animate(object, to:, duration:)
+      def lerp(object, to:, duration:)
         first_frame_values = {}.tap { |frame|
           to.each_key do |key|
             frame[key] = object[key]
