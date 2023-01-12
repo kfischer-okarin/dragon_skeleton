@@ -1,5 +1,5 @@
 module DragonSkeleton
-  module FileFormats
+  module FileFormats # :nodoc:
     # Contains methods for reading Aseprite JSON Data files as produced by the
     # "Export Sprite Sheet" command.
     #
