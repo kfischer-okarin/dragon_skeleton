@@ -68,11 +68,8 @@ module DragonSkeleton
       # [:easing] The easing function to use when interpolating between
       #           the current and next frame.
       #
-      #           Allowed values are:
-      #
-      #           [:none (default)] No easing, the value will be set immediately once the frame becomes active.
-      #
-      #           [:linear] Linear interpolation between the current values and the values of the next frame.
+      #           Check out the EASING_FUNCTIONS constant for a list of
+      #           available easing functions.
       def build(frames:)
         {
           frames: frames.map { |frame|
@@ -145,7 +142,7 @@ module DragonSkeleton
         frame = current_frame(animation_state)
         return frame[:values] if frame[:easing] == :none
 
-        factor = Easing.send(frame[:easing], animation_state[:ticks] / frame[:duration])
+        factor = EASING_FUNCTIONS[frame[:easing]].call(animation_state[:ticks] / frame[:duration])
         next_frame_values = next_frame(animation_state)[:values]
         {}.tap { |values|
           frame[:values].each do |key, value|
@@ -164,12 +161,13 @@ module DragonSkeleton
       end
     end
 
-    module Easing
-      class << self
-        def linear(t)
-          t
-        end
-      end
-    end
+    # Easing functions for interpolating between frames.
+    #
+    # Following easing functions are provided but you can also add your own to this hash:
+    #
+    # [:linear] Linear interpolation between the current values and the values of the next frame.
+    EASING_FUNCTIONS = {
+      linear: ->(t) { t }
+    }
   end
 end
