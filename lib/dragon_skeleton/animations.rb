@@ -165,7 +165,7 @@ module DragonSkeleton
     #
     # Following easing functions are provided but you can also add your own to this hash:
     #
-    # [:linear] Linear interpolation between the current values and the values of the next frame.
+    # [:linear] rdoc-image:../images/easing_linear.png
     EASING_FUNCTIONS = {
       linear: ->(t) { t }
     }
