@@ -1,6 +1,5 @@
 require 'lib/dragon_skeleton.rb'
 require 'lib/dragon_skeleton/animations.rb'
-require 'lib/dragon_skeleton/animated_sprite.rb'
 require 'lib/dragon_skeleton/file_formats/aseprite_json.rb'
 
 
