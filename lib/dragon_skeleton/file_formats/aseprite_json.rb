@@ -1,6 +1,6 @@
 module DragonSkeleton
   module FileFormats
-    module AsespriteJson
+    module AsepriteJson
       class << self
         # Reads an Aseprite Spritesheet JSON data file and returns a hash of animations.
         # The JSON file must have been exported as Array with Tags and Slices enabled.
