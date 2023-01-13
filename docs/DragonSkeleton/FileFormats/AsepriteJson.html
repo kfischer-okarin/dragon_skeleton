@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module DragonSkeleton::FileFormats::AsepriteJson - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+  var index_rel_prefix = "../../";
+</script>
+
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-flip_animation_horizontally">::flip_animation_horizontally</a>
+    <li ><a href="#method-c-read_as_animations">::read_as_animations</a>
+    <li ><a href="#method-c-read_as_sprites">::read_as_sprites</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-DragonSkeleton::FileFormats::AsepriteJson">
+  <h1 id="module-DragonSkeleton::FileFormats::AsepriteJson" class="module">
+    module DragonSkeleton::FileFormats::AsepriteJson
+  </h1>
+
+  <section class="description">
+    
+<p>Contains methods for reading Aseprite JSON Data files as produced by the “Export Sprite Sheet” command.</p>
+
+<p>The Data file must have been exported as <strong>Array</strong> with <strong>Tags</strong> and <strong>Slices</strong> enabled.</p>
+
+<p>Tag names will be converted to symbols during reading.</p>
+
+<p>Frame durations will be rounded down to the nearest 3 ticks (50ms).</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-flip_animation_horizontally" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">flip_animation_horizontally</span><span
+            class="method-args">(animation)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Returns a new animation with all frames (and associated slices) flipped horizontally.</p>
+
+          <div class="method-source-code" id="flip_animation_horizontally-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/file_formats/aseprite_json.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">flip_animation_horizontally</span>(<span class="ruby-identifier">animation</span>)
+  {
+    <span class="ruby-value">frames:</span> <span class="ruby-identifier">animation</span>[<span class="ruby-value">:frames</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">frame</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">values</span> = <span class="ruby-identifier">frame</span>[<span class="ruby-value">:values</span>]
+      <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">merge</span>(
+        <span class="ruby-value">values:</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">flip_horizontally:</span> <span class="ruby-operator">!</span><span class="ruby-identifier">values</span>[<span class="ruby-value">:flip_horizontally</span>]),
+        <span class="ruby-value">metadata:</span> {
+          <span class="ruby-value">slices:</span> <span class="ruby-identifier">frame</span>[<span class="ruby-value">:metadata</span>][<span class="ruby-value">:slices</span>].<span class="ruby-identifier">transform_values</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">bounds</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">bounds</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">x:</span> <span class="ruby-identifier">values</span>[<span class="ruby-value">:w</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">bounds</span>[<span class="ruby-value">:x</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">bounds</span>[<span class="ruby-value">:w</span>])
+          }
+        }
+      )
+    }
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-read_as_animations" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">read_as_animations</span><span
+            class="method-args">(json_path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Reads an Aseprite Spritesheet JSON data file and returns a hash of animations which can be used with the <a href="../Animations.html"><code>DragonSkeleton::Animations</code></a> or DragonSkeleton::AnimatedSprite modules.</p>
+
+          <div class="method-source-code" id="read_as_animations-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/file_formats/aseprite_json.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read_as_animations</span>(<span class="ruby-identifier">json_path</span>)
+  <span class="ruby-identifier">sprite_sheet_data</span> = <span class="ruby-identifier">deep_symbolize_keys!</span> <span class="ruby-identifier">$gtk</span>.<span class="ruby-identifier">parse_json_file</span>(<span class="ruby-identifier">json_path</span>)
+
+  <span class="ruby-identifier">path</span> = <span class="ruby-identifier">sprite_path</span>(<span class="ruby-identifier">sprite_sheet_data</span>, <span class="ruby-identifier">json_path</span>)
+
+  {}.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">result</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">frames</span> = <span class="ruby-identifier">sprite_sheet_data</span>.<span class="ruby-identifier">fetch</span> <span class="ruby-value">:frames</span>
+    <span class="ruby-identifier">slices_data</span> = <span class="ruby-identifier">sprite_sheet_data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:meta</span>).<span class="ruby-identifier">fetch</span> <span class="ruby-value">:slices</span>
+
+    <span class="ruby-identifier">sprite_sheet_data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:meta</span>).<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:frameTags</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">frame_tag_data</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">frame_tag_data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:name</span>).<span class="ruby-identifier">to_sym</span>
+      <span class="ruby-identifier">frame_range</span> = <span class="ruby-identifier">frame_tag_data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:from</span>)<span class="ruby-operator">..</span><span class="ruby-identifier">frame_tag_data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:to</span>)
+      <span class="ruby-identifier">tag_frames</span> = <span class="ruby-identifier">frame_range</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">frame_index</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">frame_data</span> = <span class="ruby-identifier">frames</span>[<span class="ruby-identifier">frame_index</span>]
+        <span class="ruby-identifier">frame</span> = <span class="ruby-identifier">frame_data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:frame</span>)
+        {
+          <span class="ruby-value">path:</span> <span class="ruby-identifier">path</span>,
+          <span class="ruby-value">w:</span> <span class="ruby-identifier">frame</span>[<span class="ruby-value">:w</span>],
+          <span class="ruby-value">h:</span> <span class="ruby-identifier">frame</span>[<span class="ruby-value">:h</span>],
+          <span class="ruby-value">tile_x:</span> <span class="ruby-identifier">frame</span>[<span class="ruby-value">:x</span>],
+          <span class="ruby-value">tile_y:</span> <span class="ruby-identifier">frame</span>[<span class="ruby-value">:y</span>],
+          <span class="ruby-value">tile_w:</span> <span class="ruby-identifier">frame</span>[<span class="ruby-value">:w</span>],
+          <span class="ruby-value">tile_h:</span> <span class="ruby-identifier">frame</span>[<span class="ruby-value">:h</span>],
+          <span class="ruby-value">flip_horizontally:</span> <span class="ruby-keyword">false</span>,
+          <span class="ruby-value">duration:</span> <span class="ruby-identifier">frame_data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:duration</span>).<span class="ruby-identifier">idiv</span>(<span class="ruby-value">50</span>) <span class="ruby-operator">*</span> <span class="ruby-value">3</span>, <span class="ruby-comment"># 50ms = 3 ticks</span>
+          <span class="ruby-value">metadata:</span> {
+            <span class="ruby-value">slices:</span> <span class="ruby-identifier">slice_bounds_for_frame</span>(<span class="ruby-identifier">slices_data</span>, <span class="ruby-identifier">frame_index</span>, <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">:w</span>, <span class="ruby-value">:h</span>))
+          }
+        }
+      }
+      <span class="ruby-identifier">apply_animation_direction!</span> <span class="ruby-identifier">tag_frames</span>, <span class="ruby-identifier">frame_tag_data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:direction</span>)
+      <span class="ruby-identifier">result</span>[<span class="ruby-identifier">tag</span>.<span class="ruby-identifier">to_sym</span>] = <span class="ruby-constant">Animations</span>.<span class="ruby-identifier">build</span>(<span class="ruby-value">frames:</span> <span class="ruby-identifier">tag_frames</span>)
+    <span class="ruby-keyword">end</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-read_as_sprites" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">read_as_sprites</span><span
+            class="method-args">(json_path)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Reads an Aseprite Spritesheet JSON data file and returns a hash of sprites.</p>
+
+<p>If a tag has only one frame, the sprite will be returned directly, otherwise an array of sprites will be returned.</p>
+
+          <div class="method-source-code" id="read_as_sprites-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/file_formats/aseprite_json.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read_as_sprites</span>(<span class="ruby-identifier">json_path</span>)
+  <span class="ruby-identifier">animations</span> = <span class="ruby-identifier">read_as_animations</span> <span class="ruby-identifier">json_path</span>
+  <span class="ruby-identifier">animations</span>.<span class="ruby-identifier">transform_values</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">animation</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">sprites</span> = <span class="ruby-identifier">animation</span>[<span class="ruby-value">:frames</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">frame</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">frame</span>[<span class="ruby-value">:values</span>].<span class="ruby-identifier">to_sprite</span>(<span class="ruby-identifier">frame</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">:duration</span>, <span class="ruby-value">:metadata</span>))
+    }
+    <span class="ruby-identifier">sprites</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">sprites</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">sprites</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class DragonSkeleton::Tilemap - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">Object
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-new">::new</a>
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    <li ><a href="#method-i-cell_rect">#cell_rect</a>
+    <li ><a href="#method-i-h">#h</a>
+    <li ><a href="#method-i-render">#render</a>
+    <li ><a href="#method-i-to_grid_coordinates">#to_grid_coordinates</a>
+    <li ><a href="#method-i-w">#w</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-DragonSkeleton::Tilemap">
+  <h1 id="class-DragonSkeleton::Tilemap" class="class">
+    class DragonSkeleton::Tilemap
+  </h1>
+
+  <section class="description">
+    
+<p>A <a href="Tilemap.html"><code>Tilemap</code></a> manages a grid of tiles and renders them to the screen.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">args</span>.<span class="ruby-identifier">state</span>.<span class="ruby-identifier">tilemap</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Tilemap</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">x:</span> <span class="ruby-value">0</span>, <span class="ruby-value">y:</span> <span class="ruby-value">0</span>, <span class="ruby-value">cell_w:</span> <span class="ruby-value">16</span>, <span class="ruby-value">cell_h:</span> <span class="ruby-value">16</span>, <span class="ruby-value">grid_w:</span> <span class="ruby-value">40</span>, <span class="ruby-value">grid_h:</span> <span class="ruby-value">25</span>)
+<span class="ruby-identifier">args</span>.<span class="ruby-identifier">state</span>.<span class="ruby-identifier">tilemap</span>[<span class="ruby-value">0</span>, <span class="ruby-value">0</span>].<span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;sprites/tiles/stone_floor.png&#39;</span>
+<span class="ruby-identifier">args</span>.<span class="ruby-identifier">state</span>.<span class="ruby-identifier">tilemap</span>[<span class="ruby-value">1</span>, <span class="ruby-value">0</span>].<span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;sprites/tiles/stone_wall.png&#39;</span>
+<span class="ruby-comment"># ...</span>
+
+<span class="ruby-identifier">args</span>.<span class="ruby-identifier">state</span>.<span class="ruby-identifier">tilemap</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">outputs</span>)
+</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      <div id="attribute-i-cell_h" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">cell_h</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The height of each cell in the tilemap</p>
+        </div>
+      </div>
+      <div id="attribute-i-cell_w" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">cell_w</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The width of each cell in the tilemap</p>
+        </div>
+      </div>
+      <div id="attribute-i-grid_h" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">grid_h</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The height of the tilemap in cells</p>
+        </div>
+      </div>
+      <div id="attribute-i-grid_w" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">grid_w</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The width of the tilemap in cells</p>
+        </div>
+      </div>
+      <div id="attribute-i-x" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">x</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The x coordinate of the bottom left corner of the tilemap</p>
+        </div>
+      </div>
+      <div id="attribute-i-y" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">y</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        <p>The y coordinate of the bottom left corner of the tilemap</p>
+        </div>
+      </div>
+    </section>
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-new" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(x:, y:, cell_w:, cell_h:, grid_w:, grid_h:, tileset: nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Creates a new tilemap.</p>
+
+<p>You can optionally pass a tileset to use for the tilemap.</p>
+
+<p>A tileset is an object that responds to the following methods:</p>
+<dl class="rdoc-list label-list"><dt><code>default_tile</code>
+<dd>
+<p>Returns a Hash with default values for each cell</p>
+</dd><dt><code>[]</code>
+<dd>
+<p>Receives a tile key as argument and returns a Hash with values for the given tile</p>
+</dd></dl>
+
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/tilemap.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">x:</span>, <span class="ruby-value">y:</span>, <span class="ruby-value">cell_w:</span>, <span class="ruby-value">cell_h:</span>, <span class="ruby-value">grid_w:</span>, <span class="ruby-value">grid_h:</span>, <span class="ruby-value">tileset:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@x</span> = <span class="ruby-identifier">x</span>
+  <span class="ruby-ivar">@y</span> = <span class="ruby-identifier">y</span>
+  <span class="ruby-ivar">@cell_w</span> = <span class="ruby-identifier">cell_w</span>
+  <span class="ruby-ivar">@cell_h</span> = <span class="ruby-identifier">cell_h</span>
+  <span class="ruby-ivar">@grid_h</span> = <span class="ruby-identifier">grid_h</span>
+  <span class="ruby-ivar">@grid_w</span> = <span class="ruby-identifier">grid_w</span>
+  <span class="ruby-ivar">@tileset</span> = <span class="ruby-identifier">tileset</span>
+  <span class="ruby-ivar">@cells</span> = <span class="ruby-identifier">grid_h</span>.<span class="ruby-identifier">times</span>.<span class="ruby-identifier">flat_map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">grid_y</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">grid_w</span>.<span class="ruby-identifier">times</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">grid_x</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">Cell</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">grid_x</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">cell_w</span>, <span class="ruby-identifier">grid_y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">cell_h</span>, <span class="ruby-value">tileset:</span> <span class="ruby-identifier">tileset</span>)
+    }
+  }
+  <span class="ruby-ivar">@primitive</span> = <span class="ruby-constant">RenderedPrimitive</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@cells</span>, <span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-5B-5D" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">[]</span><span
+            class="method-args">(x, y)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the <a href="Tilemap/Cell.html"><code>Cell</code></a> at the given grid coordinates.</p>
+
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/tilemap.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>)
+  <span class="ruby-ivar">@cells</span>[<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@grid_w</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-cell_rect" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">cell_rect</span><span
+            class="method-args">(grid_coordinates)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the rectangle of the cell at the given grid coordinates.</p>
+
+          <div class="method-source-code" id="cell_rect-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/tilemap.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cell_rect</span>(<span class="ruby-identifier">grid_coordinates</span>)
+  {
+    <span class="ruby-value">x:</span> <span class="ruby-ivar">@x</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">grid_coordinates</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@cell_w</span>),
+    <span class="ruby-value">y:</span> <span class="ruby-ivar">@y</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">grid_coordinates</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@cell_h</span>),
+    <span class="ruby-value">w:</span> <span class="ruby-ivar">@cell_w</span>,
+    <span class="ruby-value">h:</span> <span class="ruby-ivar">@cell_h</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-h" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">h</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the height of the tilemap in pixels.</p>
+
+          <div class="method-source-code" id="h-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/tilemap.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">h</span>
+  <span class="ruby-ivar">@grid_h</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@cell_h</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-render" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">render</span><span
+            class="method-args">(outputs)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Renders the tilemap to the given outputs / render target.</p>
+
+          <div class="method-source-code" id="render-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/tilemap.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render</span>(<span class="ruby-identifier">outputs</span>)
+  <span class="ruby-identifier">outputs</span>.<span class="ruby-identifier">primitives</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@primitive</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-to_grid_coordinates" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">to_grid_coordinates</span><span
+            class="method-args">(position)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Converts a position to grid coordinates.</p>
+
+          <div class="method-source-code" id="to_grid_coordinates-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/tilemap.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_grid_coordinates</span>(<span class="ruby-identifier">position</span>)
+  {
+    <span class="ruby-value">x:</span> (<span class="ruby-identifier">position</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@x</span>).<span class="ruby-identifier">idiv</span>(<span class="ruby-ivar">@cell_w</span>),
+    <span class="ruby-value">y:</span> (<span class="ruby-identifier">position</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@y</span>).<span class="ruby-identifier">idiv</span>(<span class="ruby-ivar">@cell_h</span>)
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-w" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">w</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the width of the tilemap in pixels.</p>
+
+          <div class="method-source-code" id="w-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/tilemap.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">w</span>
+  <span class="ruby-ivar">@grid_w</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@cell_w</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

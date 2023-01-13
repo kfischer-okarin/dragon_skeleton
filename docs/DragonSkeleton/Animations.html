@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module DragonSkeleton::Animations - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
+</script>
+
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-build">::build</a>
+    <li ><a href="#method-c-current_frame_metadata">::current_frame_metadata</a>
+    <li ><a href="#method-c-finished-3F">::finished?</a>
+    <li ><a href="#method-c-lerp">::lerp</a>
+    <li ><a href="#method-c-perform_tick">::perform_tick</a>
+    <li ><a href="#method-c-start-21">::start!</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-DragonSkeleton::Animations">
+  <h1 id="module-DragonSkeleton::Animations" class="module">
+    module DragonSkeleton::Animations
+  </h1>
+
+  <section class="description">
+    
+<p>Provides a simple functional style animation system.</p>
+
+<p>In the simplest case, a frame is a hash of values to be set on the target and a duration:</p>
+
+<pre class="ruby"><span class="ruby-identifier">animation</span> = <span class="ruby-constant">Animations</span>.<span class="ruby-identifier">build</span>(
+  <span class="ruby-value">frames:</span> [
+    { <span class="ruby-value">tile_x:</span> <span class="ruby-value">0</span>, <span class="ruby-value">tile_y:</span> <span class="ruby-value">0</span>, <span class="ruby-value">duration:</span> <span class="ruby-value">5</span> },
+    { <span class="ruby-value">tile_x:</span> <span class="ruby-value">32</span>, <span class="ruby-value">tile_y:</span> <span class="ruby-value">0</span>, <span class="ruby-value">duration:</span> <span class="ruby-value">5</span> }
+  ]
+)
+</pre>
+
+<p>It can then be started via <a href="Animations.html#method-c-start-21"><code>::start!</code></a> on a target (e.g. a sprite):</p>
+
+<pre class="ruby"><span class="ruby-identifier">sprite</span> = { <span class="ruby-value">x:</span> <span class="ruby-value">100</span>, <span class="ruby-value">y:</span> <span class="ruby-value">100</span>, <span class="ruby-value">w:</span> <span class="ruby-value">32</span>, <span class="ruby-value">h:</span> <span class="ruby-value">32</span>, <span class="ruby-value">tile_w:</span> <span class="ruby-value">32</span>, <span class="ruby-value">tile_h:</span> <span class="ruby-value">32</span>, <span class="ruby-value">path:</span> <span class="ruby-string">&#39;resources/character.png&#39;</span> }
+<span class="ruby-identifier">animation_state</span> = <span class="ruby-constant">Animations</span>.<span class="ruby-identifier">start!</span> <span class="ruby-identifier">sprite</span>, <span class="ruby-value">animation:</span> <span class="ruby-identifier">animation</span>
+</pre>
+
+<p>and every tick you need to call <a href="Animations.html#method-c-perform_tick"><code>::perform_tick</code></a> to advance the animation:</p>
+
+<pre class="ruby"><span class="ruby-constant">Animations</span>.<span class="ruby-identifier">perform_tick</span> <span class="ruby-identifier">animation_state</span>
+</pre>
+
+<p>By default the animation will stay on a frame until the duration is reached, then immediately move to the next frame but you can also specify an easing function to gradually interpolate between frames:</p>
+
+<pre class="ruby"><span class="ruby-identifier">animation</span> = <span class="ruby-constant">Animations</span>.<span class="ruby-identifier">build</span>(
+  <span class="ruby-value">frames:</span> [
+    { <span class="ruby-value">x:</span> <span class="ruby-value">0</span>, <span class="ruby-value">y:</span> <span class="ruby-value">0</span>, <span class="ruby-value">duration:</span> <span class="ruby-value">5</span>, <span class="ruby-value">easing:</span> <span class="ruby-value">:linear</span> },
+    { <span class="ruby-value">x:</span> <span class="ruby-value">100</span>, <span class="ruby-value">tile_y:</span> <span class="ruby-value">100</span>, <span class="ruby-value">duration:</span> <span class="ruby-value">5</span>, <span class="ruby-value">easing:</span> <span class="ruby-value">:linear</span> }
+  ]
+)
+</pre>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="EASING_FUNCTIONS">EASING_FUNCTIONS
+        <dd><p>Easing functions for interpolating between frames.</p>
+
+<p>Following easing functions are provided but you can also add your own to this hash:</p>
+<dl class="rdoc-list label-list"><dt>:linear
+<dd>
+<p><img src="../images/easing_linear.png"></p>
+</dd></dl>
+      </dl>
+    </section>
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-build" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">build</span><span
+            class="method-args">(frames:)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Builds an animation from a list of frames.</p>
+
+<p>Each frame is a hash of values that will be set on the target when the frame becomes active except for the following reserved keys:</p>
+<dl class="rdoc-list label-list"><dt>:duration
+<dd>
+<p>The number of ticks the frame will be active for.</p>
+
+<p>This value is required except for the last frame of a non-repeating animation.</p>
+</dd><dt>:metadata
+<dd>
+<p>A hash of metadata that is available via <a href="Animations.html#method-c-current_frame_metadata"><code>::current_frame_metadata</code></a> when the frame is active.</p>
+</dd><dt>:easing
+<dd>
+<p>The easing function to use when interpolating between the current and next frame.</p>
+
+<p>Check out the <a href="Animations.html#EASING_FUNCTIONS"><code>EASING_FUNCTIONS</code></a> constant for a list of available easing functions.</p>
+</dd></dl>
+
+          <div class="method-source-code" id="build-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/animations.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build</span>(<span class="ruby-value">frames:</span>)
+  {
+    <span class="ruby-value">frames:</span> <span class="ruby-identifier">frames</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">frame</span><span class="ruby-operator">|</span>
+      {
+        <span class="ruby-value">duration:</span> <span class="ruby-identifier">frame</span>[<span class="ruby-value">:duration</span>],
+        <span class="ruby-value">metadata:</span> <span class="ruby-identifier">frame</span>[<span class="ruby-value">:metadata</span>],
+        <span class="ruby-value">easing:</span> <span class="ruby-identifier">frame</span>[<span class="ruby-value">:easing</span>] <span class="ruby-operator">||</span> <span class="ruby-value">:none</span>,
+        <span class="ruby-value">values:</span> <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">except</span>(<span class="ruby-value">:duration</span>, <span class="ruby-value">:metadata</span>, <span class="ruby-value">:easing</span>)
+      }
+    }
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-current_frame_metadata" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">current_frame_metadata</span><span
+            class="method-args">(animation_state)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Returns the metadata associated with the active frame of the animation.</p>
+
+          <div class="method-source-code" id="current_frame_metadata-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/animations.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">current_frame_metadata</span>(<span class="ruby-identifier">animation_state</span>)
+  <span class="ruby-identifier">current_frame</span>(<span class="ruby-identifier">animation_state</span>)[<span class="ruby-value">:metadata</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-finished-3F" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">finished?</span><span
+            class="method-args">(animation_state)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Returns <code>true</code> if the animation has finished.</p>
+
+          <div class="method-source-code" id="finished-3F-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/animations.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">finished?</span>(<span class="ruby-identifier">animation_state</span>)
+  <span class="ruby-identifier">animation_state</span>[<span class="ruby-value">:finished</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-lerp" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">lerp</span><span
+            class="method-args">(target, to:, duration:)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Creates and starts a one-time animation that will interpolate between the current values of the target and the values in the <code>to</code> hash.</p>
+
+<p>Returns an animation state that can be passed to <a href="Animations.html#method-c-perform_tick"><code>::perform_tick</code></a>.</p>
+
+          <div class="method-source-code" id="lerp-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/animations.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lerp</span>(<span class="ruby-identifier">target</span>, <span class="ruby-value">to:</span>, <span class="ruby-value">duration:</span>)
+  <span class="ruby-identifier">first_frame_values</span> = {}.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">frame</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">to</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">frame</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">target</span>[<span class="ruby-identifier">key</span>]
+    <span class="ruby-keyword">end</span>
+  }
+  <span class="ruby-identifier">animation</span> = <span class="ruby-identifier">build</span>(
+    <span class="ruby-value">frames:</span> [
+      <span class="ruby-identifier">first_frame_values</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-value">duration:</span> <span class="ruby-identifier">duration</span>, <span class="ruby-value">easing:</span> <span class="ruby-value">:linear</span>),
+      <span class="ruby-identifier">to</span>.<span class="ruby-identifier">dup</span>
+    ]
+  )
+  <span class="ruby-identifier">start!</span> <span class="ruby-identifier">target</span>, <span class="ruby-value">animation:</span> <span class="ruby-identifier">animation</span>, <span class="ruby-value">repeat:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-perform_tick" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">perform_tick</span><span
+            class="method-args">(animation_state)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Advances the animation by one tick.</p>
+
+          <div class="method-source-code" id="perform_tick-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/animations.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">perform_tick</span>(<span class="ruby-identifier">animation_state</span>)
+  <span class="ruby-identifier">next_tick</span> <span class="ruby-identifier">animation_state</span>
+  <span class="ruby-identifier">update_target</span> <span class="ruby-identifier">animation_state</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-start-21" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">start!</span><span
+            class="method-args">(target, animation:, repeat: true)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Starts an animation on a target and returns an animation state which can be used to advance the animation via <a href="Animations.html#method-c-perform_tick"><code>::perform_tick</code></a>.</p>
+
+<p>By default the animation will repeat indefinitely but this can be disabled by setting <code>repeat: false</code>.</p>
+
+          <div class="method-source-code" id="start-21-source">
+            <pre><span class="ruby-comment"># File lib/dragon_skeleton/animations.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">start!</span>(<span class="ruby-identifier">target</span>, <span class="ruby-value">animation:</span>, <span class="ruby-value">repeat:</span> <span class="ruby-keyword">true</span>)
+  {
+    <span class="ruby-value">animation:</span> <span class="ruby-identifier">animation</span>,
+    <span class="ruby-value">target:</span> <span class="ruby-identifier">target</span>,
+    <span class="ruby-value">frame_index:</span> <span class="ruby-value">0</span>,
+    <span class="ruby-value">ticks:</span> <span class="ruby-value">0</span>,
+    <span class="ruby-value">repeat:</span> <span class="ruby-identifier">repeat</span>,
+    <span class="ruby-value">finished:</span> <span class="ruby-keyword">false</span>
+  }.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">animation_state</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">update_target</span> <span class="ruby-identifier">animation_state</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.4.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
