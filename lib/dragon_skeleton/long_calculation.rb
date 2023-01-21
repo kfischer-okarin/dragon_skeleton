@@ -6,7 +6,7 @@ module DragonSkeleton
           result = yield
           Fiber.current.result = result
         end
-        add_additional_methods fiber
+        fiber.extend LongCalculationFiber
         fiber
       end
 
@@ -18,30 +18,6 @@ module DragonSkeleton
 
       def inside_calculation?
         Fiber.current.respond_to? :result
-      end
-
-      private
-
-      def add_additional_methods(fiber)
-        def fiber.resume
-          super unless finished?
-        end
-
-        def fiber.finished?
-          !result.nil?
-        end
-
-        def fiber.finish
-          resume while result.nil?
-        end
-
-        state = {}
-        fiber.define_singleton_method :result do
-          state[:result]
-        end
-        fiber.define_singleton_method :result= do |value|
-          state[:result] = value
-        end
       end
     end
   end
