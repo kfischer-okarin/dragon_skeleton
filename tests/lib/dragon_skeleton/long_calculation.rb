@@ -10,20 +10,20 @@ def test_long_calculation_basic_behaviour(_args, assert)
     :finished
   end
 
-  result = calculation.resume
+  calculation.resume
 
   assert.equal! progress, [1]
-  assert.nil! result
+  assert.nil! calculation.result
 
-  result = calculation.resume
-
-  assert.equal! progress, [1, 2]
-  assert.nil! result
-
-  result = calculation.resume
+  calculation.resume
 
   assert.equal! progress, [1, 2]
-  assert.equal! result, :finished
+  assert.nil! calculation.result
+
+  calculation.resume
+
+  assert.equal! progress, [1, 2]
+  assert.equal! calculation.result, :finished
 end
 
 def test_long_calculation_do_nothing_when_finish_step_outside_calculation(_args, assert)
