@@ -30,3 +30,19 @@ def test_long_calculation_do_nothing_when_finish_step_outside_calculation(_args,
   LongCalculation.finish_step # should not raise any error
   assert.ok!
 end
+
+def test_long_calculation_finish(_args, assert)
+  progress = []
+  calculation = LongCalculation.define do
+    10.times do |i|
+      progress << i
+      LongCalculation.finish_step
+    end
+    :finished
+  end
+
+  calculation.finish
+
+  assert.equal! progress, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  assert.equal! calculation.result, :finished
+end

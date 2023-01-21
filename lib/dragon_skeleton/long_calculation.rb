@@ -28,6 +28,9 @@ module DragonSkeleton
         fiber.define_singleton_method :result= do |value|
           state[:result] = value
         end
+        fiber.define_singleton_method :finish do
+          resume while result.nil?
+        end
       end
     end
   end
