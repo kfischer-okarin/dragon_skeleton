@@ -13,7 +13,8 @@ keywords = []
 requires = [
   "lib/dragon_skeleton/animations.rb",
   "lib/dragon_skeleton/buttons.rb",
-  "lib/dragon_skeleton/file_formats/aseprite_json.rb"
+  "lib/dragon_skeleton/file_formats/aseprite_json.rb",
+  "lib/dragon_skeleton/long_calculation.rb"
 ]
 
 
