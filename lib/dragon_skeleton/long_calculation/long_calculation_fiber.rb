@@ -25,6 +25,11 @@ module DragonSkeleton
       def finish
         resume until finished?
       end
+
+      def run_for_ms(milliseconds)
+        start_time = Time.now.to_f
+        resume until finished? || (Time.now.to_f - start_time) * 1000 >= milliseconds
+      end
     end
   end
 end

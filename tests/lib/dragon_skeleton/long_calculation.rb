@@ -65,3 +65,19 @@ def test_long_calculation_finish(_args, assert)
   assert.equal! progress, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   assert.equal! calculation.result, :finished
 end
+
+def test_long_calculation_run_for_ms(_args, assert)
+  calculation = LongCalculation.define do
+    loop do
+      LongCalculation.finish_step
+    end
+  end
+
+  start_time = Time.now.to_f
+  calculation.run_for_ms(5)
+  end_time = Time.now.to_f
+
+  run_time = (end_time - start_time) * 1000
+  assert.true! run_time.between?(5, 10), "Expected fiber to run for rougly 5ms but it ran for #{run_time}ms"
+  assert.false! calculation.finished?
+end
