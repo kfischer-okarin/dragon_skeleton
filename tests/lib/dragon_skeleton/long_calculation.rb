@@ -31,6 +31,20 @@ def test_long_calculation_basic_behaviour(_args, assert)
   calculation.resume # should not raise any error
 end
 
+def test_long_calculation_inside_calculation(_args, assert)
+  results = {}
+  calculation = LongCalculation.define do
+    results[:inside] = LongCalculation.inside_calculation?
+    LongCalculation.finish_step
+    :finished
+  end
+
+  results[:outside] = LongCalculation.inside_calculation?
+  calculation.resume
+
+  assert.equal! results, { outside: false, inside: true }
+end
+
 def test_long_calculation_do_nothing_when_finish_step_outside_calculation(_args, assert)
   LongCalculation.finish_step # should not raise any error
   assert.ok!

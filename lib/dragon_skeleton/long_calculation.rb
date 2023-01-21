@@ -1,7 +1,6 @@
 module DragonSkeleton
   module LongCalculation
     class << self
-
       def define
         fiber = Fiber.new do
           result = yield
@@ -12,9 +11,13 @@ module DragonSkeleton
       end
 
       def finish_step
-        return unless Fiber.current.respond_to? :result
+        return unless inside_calculation?
 
         Fiber.yield
+      end
+
+      def inside_calculation?
+        Fiber.current.respond_to? :result
       end
 
       private
