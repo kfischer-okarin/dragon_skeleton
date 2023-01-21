@@ -25,3 +25,8 @@ def test_long_calculation_basic_behaviour(_args, assert)
   assert.equal! progress, [1, 2]
   assert.equal! result, :finished
 end
+
+def test_long_calculation_do_nothing_when_finish_step_outside_calculation(_args, assert)
+  LongCalculation.finish_step # should not raise any error
+  assert.ok!
+end
