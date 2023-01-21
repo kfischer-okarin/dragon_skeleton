@@ -14,16 +14,21 @@ def test_long_calculation_basic_behaviour(_args, assert)
 
   assert.equal! progress, [1]
   assert.nil! calculation.result
+  assert.false! calculation.finished?
 
   calculation.resume
 
   assert.equal! progress, [1, 2]
   assert.nil! calculation.result
+  assert.false! calculation.finished?
 
   calculation.resume
 
   assert.equal! progress, [1, 2]
   assert.equal! calculation.result, :finished
+  assert.true! calculation.finished?
+
+  calculation.resume # should not raise any error
 end
 
 def test_long_calculation_do_nothing_when_finish_step_outside_calculation(_args, assert)
