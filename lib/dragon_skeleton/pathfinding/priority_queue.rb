@@ -1,6 +1,6 @@
 module DragonSkeleton
   module Pathfinding
-    class PriorityQueue
+    class PriorityQueue # :nodoc: Internal use by AStar only
       def initialize
         @data = [nil]
       end

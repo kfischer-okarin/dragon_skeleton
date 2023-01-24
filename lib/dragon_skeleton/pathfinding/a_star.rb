@@ -1,11 +1,23 @@
 module DragonSkeleton
   module Pathfinding
+    # Pathfinder using the A* algorithm.
     class AStar
+      # Creates a new A* pathfinder with the given graph and heuristic.
+      #
+      # [graph] The graph to search. See the explanation in Pathfinding for more
+      #         details about the data structure.
+      # [heuristic] A proc that takes two nodes and returns the heuristic value.
+      #             Commonly used distance functions are defined as constants in Pathfinding
+      #             (e.g. Pathfinding::MANHATTAN_DISTANCE).
       def initialize(graph, heuristic:)
         @graph = graph
         @heuristic = heuristic
       end
 
+      # Finds a path from the start node to the goal node.
+      #
+      # Returns an array of nodes that form the path from the start node to the goal node.
+      # If no path is found, an empty array is returned.
       def find_path(start, goal)
         frontier = PriorityQueue.new
         came_from = { start => nil }
