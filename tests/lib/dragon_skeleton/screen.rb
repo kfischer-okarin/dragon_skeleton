@@ -17,3 +17,23 @@ def test_screen_build_render_target(args, assert)
                   "Expected height to be #{test_case[:expected_height]}"
   end
 end
+
+def test_screen_sprite(_args, assert)
+  [
+    {
+      resolution_args: [320],
+      expected_sprite: { x: 0, y: 0, w: 1280, h: 720, path: :screen }.sprite!
+    },
+    {
+      resolution_args: [64, 64],
+      expected_sprite: { x: 288, y: 8, w: 704, h: 704, path: :screen }.sprite!
+    }
+  ].each do |test_case|
+    screen = Screen.with_resolution(*test_case[:resolution_args])
+
+    sprite = Screen.sprite(screen)
+
+    assert.equal! sprite,
+                  test_case[:expected_sprite]
+  end
+end
