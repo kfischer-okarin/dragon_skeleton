@@ -1,8 +1,7 @@
 module DragonSkeleton
   module Screen
     class << self
-      def with_resolution(x_resolution, y_resolution = nil)
-        y_resolution ||= 720.idiv(1280.idiv(x_resolution))
+      def with_resolution(x_resolution, y_resolution)
         scale = [1280.idiv(x_resolution), 720.idiv(y_resolution)].min
         w = x_resolution * scale
         h = y_resolution * scale
