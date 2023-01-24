@@ -18,6 +18,14 @@ def test_screen_sprite(_args, assert)
     {
       screen: Screen.with_resolution(64, 64),
       expected_sprite: { x: 288, y: 8, w: 704, h: 704, path: :screen }.sprite!
+    },
+    {
+      screen: Screen.with_resolution(100, 100, scale: 3),
+      expected_sprite: { x: 490, y: 210, w: 300, h: 300, path: :screen }.sprite!
+    },
+    {
+      screen: Screen.with_resolution(100, 100, render_position: { x: 0, y: 0 }),
+      expected_sprite: { x: 0, y: 0, w: 700, h: 700, path: :screen }.sprite!
     }
   ].each do |test_case|
     screen = test_case[:screen]
