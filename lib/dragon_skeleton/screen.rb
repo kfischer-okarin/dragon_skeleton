@@ -72,5 +72,14 @@ module DragonSkeleton
         }
       end
     end
+
+    # 64x64
+    LOWREZJAM = with_resolution(64, 64)
+    # 84x48
+    NOKIA_3310 = with_resolution(84, 48)
+    # 427x240
+    SNES_STYLE = with_resolution(427, 240)
+    # 320x180
+    GBA_STYLE = with_resolution(320, 180)
   end
 end
