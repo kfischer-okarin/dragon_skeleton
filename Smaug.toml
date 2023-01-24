@@ -17,6 +17,7 @@ requires = [
   "lib/dragon_skeleton/long_calculation.rb",
   "lib/dragon_skeleton/long_calculation/long_calculation_fiber.rb",
   "lib/dragon_skeleton/pathfinding.rb",
+  "lib/dragon_skeleton/pathfinding/a_star.rb",
   "lib/dragon_skeleton/pathfinding/priority_queue.rb"
 ]
 

@@ -5,6 +5,7 @@ require 'lib/dragon_skeleton/file_formats/aseprite_json.rb'
 require 'lib/dragon_skeleton/long_calculation.rb'
 require 'lib/dragon_skeleton/long_calculation/long_calculation_fiber.rb'
 require 'lib/dragon_skeleton/pathfinding.rb'
+require 'lib/dragon_skeleton/pathfinding/a_star.rb'
 require 'lib/dragon_skeleton/pathfinding/priority_queue.rb'
 
 
