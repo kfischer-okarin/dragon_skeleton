@@ -15,7 +15,8 @@ requires = [
   "lib/dragon_skeleton/buttons.rb",
   "lib/dragon_skeleton/file_formats/aseprite_json.rb",
   "lib/dragon_skeleton/long_calculation.rb",
-  "lib/dragon_skeleton/long_calculation/long_calculation_fiber.rb"
+  "lib/dragon_skeleton/long_calculation/long_calculation_fiber.rb",
+  "lib/dragon_skeleton/pathfinding/priority_queue.rb"
 ]
 
 
