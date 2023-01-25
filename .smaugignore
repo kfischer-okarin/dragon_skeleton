@@ -3,4 +3,5 @@ app
 Gemfile
 Gemfile.lock
 Guardfile
+README.md
 tests
