@@ -24,45 +24,14 @@ module DragonSkeleton
     end
 
     module Tile
-      def path
-        self[2]
+      def self.array_accessors(*names)
+        names.each_with_index do |name, index|
+          define_method(name) { self[index] }
+          define_method("#{name}=") { |value| self[index] = value }
+        end
       end
 
-      def path=(path)
-        self[2] = path
-      end
-
-      def r
-        self[3]
-      end
-
-      def r=(r)
-        self[3] = r
-      end
-
-      def g
-        self[4]
-      end
-
-      def g=(g)
-        self[4] = g
-      end
-
-      def b
-        self[5]
-      end
-
-      def b=(b)
-        self[5] = b
-      end
-
-      def a
-        self[6]
-      end
-
-      def a=(a)
-        self[6] = a
-      end
+      array_accessors :x, :y, :path, :r, :g, :b, :a
     end
 
     class RenderedPrimitive
