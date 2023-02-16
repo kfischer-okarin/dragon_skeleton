@@ -39,6 +39,10 @@ module DragonSkeleton
         @cell_h = cell_h
       end
 
+      def primitive_marker
+        :sprite
+      end
+
       def draw_override(ffi_draw)
         w = @cell_w
         h = @cell_h
