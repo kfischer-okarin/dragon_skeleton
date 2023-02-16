@@ -7,7 +7,8 @@ module DragonSkeleton
           [
             x + grid_x * cell_w,
             y + grid_y * cell_h,
-            nil
+            nil, # path
+            nil, nil, nil, nil # r, g, b, a
           ].tap { |tile| tile.extend(Tile) }
         }
       }
@@ -30,6 +31,38 @@ module DragonSkeleton
       def path=(path)
         self[2] = path
       end
+
+      def r
+        self[3]
+      end
+
+      def r=(r)
+        self[3] = r
+      end
+
+      def g
+        self[4]
+      end
+
+      def g=(g)
+        self[4] = g
+      end
+
+      def b
+        self[5]
+      end
+
+      def b=(b)
+        self[5] = b
+      end
+
+      def a
+        self[6]
+      end
+
+      def a=(a)
+        self[6] = a
+      end
     end
 
     class RenderedPrimitive
@@ -48,11 +81,11 @@ module DragonSkeleton
         h = @cell_h
 
         @tiles.each do |tile|
-          x, y, path = tile
+          x, y, path, r, g, b, a = tile
           ffi_draw.draw_sprite_4 x, y, w, h,
                                  path,
                                  nil, # angle
-                                 nil, nil, nil, nil, # a, r, g, b
+                                 a, r, g, b, # a, r, g, b
                                  nil, nil, nil, nil, # tile_x, tile_y, tile_w, tile_h
                                  nil, nil, # flip_horizontally, flip_vertically
                                  nil, nil, # angle_anchor_x, angle_anchor_y
