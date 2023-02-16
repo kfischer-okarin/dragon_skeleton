@@ -11,11 +11,12 @@ def test_tilemap_render(args, assert)
   tilemap.render(args.outputs)
 
   assert.equal! args.outputs.primitives.length, 1
+
   primitive = args.outputs.primitives.first
   assert.equal! primitive.primitive_marker, :sprite
+
   spy = Spy.new
   primitive.draw_override spy
-
   # rubocop:disable all
   assert.equal! spy.calls, [
     [
