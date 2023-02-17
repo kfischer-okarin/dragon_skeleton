@@ -13,13 +13,14 @@ module DragonSkeleton
     attr_accessor :x, :y
     attr_reader :grid_w, :grid_h, :cell_w, :cell_h
 
-    def initialize(x:, y:, cell_w:, cell_h:, grid_w:, grid_h:)
+    def initialize(x:, y:, cell_w:, cell_h:, grid_w:, grid_h:, tileset: nil)
       @x = x
       @y = y
       @cell_w = cell_w
       @cell_h = cell_h
       @grid_h = grid_h
       @grid_w = grid_w
+      @tileset = tileset
       @cells = grid_h.times.flat_map { |grid_y|
         grid_w.times.map { |grid_x|
           [
@@ -27,8 +28,18 @@ module DragonSkeleton
             grid_y * cell_h,
             nil, # path
             nil, nil, nil, nil, # r, g, b, a
-            nil, nil, nil, nil  # tile_x, tile_y, tile_w, tile_h
-          ].tap { |cell| cell.extend(Cell) }
+            nil, nil, nil, nil, # tile_x, tile_y, tile_w, tile_h
+            nil # tile
+          ].tap { |cell|
+            cell.extend(Cell)
+            if tileset
+              cell.assign(tileset.default_tile)
+              cell.define_singleton_method(:tile=) do |tile|
+                assign(tileset[tile])
+                self[Cell.property_index(:tile)] = tile
+              end
+            end
+          }
         }
       }
       @primitive = RenderedPrimitive.new(@cells, self)
@@ -58,7 +69,7 @@ module DragonSkeleton
         @property_indexes[name]
       end
 
-      array_accessors :x, :y, :path, :r, :g, :b, :a, :tile_x, :tile_y, :tile_w, :tile_h
+      array_accessors :x, :y, :path, :r, :g, :b, :a, :tile_x, :tile_y, :tile_w, :tile_h, :tile
 
       def assign(values)
         values.each do |name, value|
