@@ -5,18 +5,18 @@ module DragonSkeleton
     # A cell is an Array with the following values which are also available as
     # attributes:
     #
-    # - +x+ (read-only)
-    # - +y+ (read-only)
-    # - +path+
-    # - +r+
-    # - +g+
-    # - +b+
-    # - +a+
-    # - +tile_x+
-    # - +tile_y+
-    # - +tile_w+
-    # - +tile_h+
-    # - +tile+: The key of the tile to use for this cell
+    # - \[0\] +x+ (read-only)
+    # - \[1\] +y+ (read-only)
+    # - \[2\] +path+
+    # - \[3\] +r+
+    # - \[4\] +g+
+    # - \[5\] +b+
+    # - \[6\] +a+
+    # - \[7\] +tile_x+
+    # - \[8\] +tile_y+
+    # - \[9\] +tile_w+
+    # - \[10\] +tile_h+
+    # - \[11\] +tile+: The key of the tile to use for this cell
     class Cell < Array
       def self.index_accessors(*names) # :nodoc: Internal method used to define accessors for the cell values.
         @property_indexes = {}
