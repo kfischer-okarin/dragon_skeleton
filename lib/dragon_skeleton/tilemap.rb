@@ -34,9 +34,10 @@ module DragonSkeleton
             cell.extend(Cell)
             if tileset
               cell.assign(tileset.default_tile)
+              tile_index = Cell.property_index(:tile)
               cell.define_singleton_method(:tile=) do |tile|
                 assign(tileset[tile])
-                self[Cell.property_index(:tile)] = tile
+                self[tile_index] = tile
               end
             end
           }
