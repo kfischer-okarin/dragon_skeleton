@@ -1,4 +1,14 @@
 module DragonSkeleton
+  # A Tilemap manages a grid of tiles and renders them to the screen.
+  #
+  # Example:
+  #
+  #   args.state.tilemap ||= Tilemap.new(x: 0, y: 0, cell_w: 16, cell_h: 16, grid_w: 40, grid_h: 25)
+  #   args.state.tilemap[0, 0].path = 'sprites/tiles/stone_floor.png'
+  #   args.state.tilemap[1, 0].path = 'sprites/tiles/stone_wall.png'
+  #   # ...
+  #
+  #   args.state.tilemap.render(args.outputs)
   class Tilemap
     attr_accessor :x, :y
     attr_reader :grid_w, :grid_h, :cell_w, :cell_h
@@ -24,15 +34,17 @@ module DragonSkeleton
       @primitive = RenderedPrimitive.new(@tiles, self)
     end
 
+    # Returns the tile at the given grid coordinates.
     def [](x, y)
       @tiles[y * @grid_w + x]
     end
 
+    # Renders the tilemap to the given outputs / render target.
     def render(outputs)
       outputs.primitives << @primitive
     end
 
-    module Tile
+    module Tile # :nodoc: For extending an array with accessors for tile properties.
       def self.array_accessors(*names)
         names.each_with_index do |name, index|
           define_method(name) { self[index] }
@@ -43,7 +55,7 @@ module DragonSkeleton
       array_accessors :x, :y, :path, :r, :g, :b, :a, :tile_x, :tile_y, :tile_w, :tile_h
     end
 
-    class RenderedPrimitive
+    class RenderedPrimitive # :nodoc: Internal class responsible for rendering the tilemap.
       def initialize(tiles, tilemap)
         @tiles = tiles
         @tilemap = tilemap
