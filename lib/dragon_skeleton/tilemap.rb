@@ -10,9 +10,29 @@ module DragonSkeleton
   #
   #   args.state.tilemap.render(args.outputs)
   class Tilemap
-    attr_accessor :x, :y
-    attr_reader :grid_w, :grid_h, :cell_w, :cell_h
+    # The x coordinate of the bottom left corner of the tilemap
+    attr_accessor :x
+    # The y coordinate of the bottom left corner of the tilemap
+    attr_accessor :y
+    # The width of each cell in the tilemap
+    attr_reader :grid_w
+    # The height of each cell in the tilemap
+    attr_reader :grid_h
+    # The width of the tilemap in cells
+    attr_reader :cell_w
+    # The height of the tilemap in cells
+    attr_reader :cell_h
 
+    # Creates a new tilemap.
+    #
+    # You can optionally pass a tileset to use for the tilemap.
+    #
+    # A tileset is an object that responds to the following methods:
+    #
+    # [+default_tile+] Returns a Hash with default values for each cell
+    #
+    # [+[]+] Receives a tile key as argument and returns a Hash with values for the
+    #        given tile
     def initialize(x:, y:, cell_w:, cell_h:, grid_w:, grid_h:, tileset: nil)
       @x = x
       @y = y
