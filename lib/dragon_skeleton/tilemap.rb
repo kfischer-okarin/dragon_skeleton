@@ -20,7 +20,7 @@ module DragonSkeleton
       @cell_h = cell_h
       @grid_h = grid_h
       @grid_w = grid_w
-      @tiles = grid_h.times.flat_map { |grid_y|
+      @cells = grid_h.times.flat_map { |grid_y|
         grid_w.times.map { |grid_x|
           [
             grid_x * cell_w,
@@ -28,15 +28,15 @@ module DragonSkeleton
             nil, # path
             nil, nil, nil, nil, # r, g, b, a
             nil, nil, nil, nil  # tile_x, tile_y, tile_w, tile_h
-          ].tap { |tile| tile.extend(Tile) }
+          ].tap { |cell| cell.extend(Cell) }
         }
       }
-      @primitive = RenderedPrimitive.new(@tiles, self)
+      @primitive = RenderedPrimitive.new(@cells, self)
     end
 
-    # Returns the tile at the given grid coordinates.
+    # Returns the cell at the given grid coordinates.
     def [](x, y)
-      @tiles[y * @grid_w + x]
+      @cells[y * @grid_w + x]
     end
 
     # Renders the tilemap to the given outputs / render target.
@@ -44,7 +44,7 @@ module DragonSkeleton
       outputs.primitives << @primitive
     end
 
-    module Tile # :nodoc: For extending an array with accessors for tile properties.
+    module Cell # :nodoc: For extending an array with accessors for cell properties.
       def self.array_accessors(*names)
         @property_indexes = {}
         names.each_with_index do |name, index|
@@ -62,14 +62,14 @@ module DragonSkeleton
 
       def assign(values)
         values.each do |name, value|
-          self[Tile.property_index(name)] = value
+          self[Cell.property_index(name)] = value
         end
       end
     end
 
     class RenderedPrimitive # :nodoc: Internal class responsible for rendering the tilemap.
-      def initialize(tiles, tilemap)
-        @tiles = tiles
+      def initialize(cells, tilemap)
+        @cells = cells
         @tilemap = tilemap
       end
 
@@ -82,11 +82,12 @@ module DragonSkeleton
         origin_y = @tilemap.y
         w = @tilemap.cell_w
         h = @tilemap.cell_h
-        tile_count = @tiles.size
+        cell_count = @cells.size
+        cells = @cells
         index = 0
 
-        while index < tile_count
-          x, y, path, r, g, b, a, tile_x, tile_y, tile_w, tile_h = @tiles[index]
+        while index < cell_count
+          x, y, path, r, g, b, a, tile_x, tile_y, tile_w, tile_h = cells[index]
           ffi_draw.draw_sprite_4 origin_x + x, origin_y + y, w, h,
                                  path,
                                  nil, # angle
