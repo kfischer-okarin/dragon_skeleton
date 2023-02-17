@@ -46,16 +46,24 @@ module DragonSkeleton
 
     module Tile # :nodoc: For extending an array with accessors for tile properties.
       def self.array_accessors(*names)
+        @property_indexes = {}
         names.each_with_index do |name, index|
+          @property_indexes[name] = index
           define_method(name) { self[index] }
           define_method("#{name}=") { |value| self[index] = value }
         end
       end
 
+      def self.property_index(name)
+        @property_indexes[name]
+      end
+
       array_accessors :x, :y, :path, :r, :g, :b, :a, :tile_x, :tile_y, :tile_w, :tile_h
 
       def assign(values)
-        values.each { |name, value| send("#{name}=", value) }
+        values.each do |name, value|
+          self[Tile.property_index(name)] = value
+        end
       end
     end
 
