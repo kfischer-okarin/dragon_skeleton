@@ -8,7 +8,8 @@ module DragonSkeleton
             x + grid_x * cell_w,
             y + grid_y * cell_h,
             nil, # path
-            nil, nil, nil, nil # r, g, b, a
+            nil, nil, nil, nil, # r, g, b, a
+            nil, nil, nil, nil  # tile_x, tile_y, tile_w, tile_h
           ].tap { |tile| tile.extend(Tile) }
         }
       }
@@ -31,7 +32,7 @@ module DragonSkeleton
         end
       end
 
-      array_accessors :x, :y, :path, :r, :g, :b, :a
+      array_accessors :x, :y, :path, :r, :g, :b, :a, :tile_x, :tile_y, :tile_w, :tile_h
     end
 
     class RenderedPrimitive
@@ -50,12 +51,12 @@ module DragonSkeleton
         h = @cell_h
 
         @tiles.each do |tile|
-          x, y, path, r, g, b, a = tile
+          x, y, path, r, g, b, a, tile_x, tile_y, tile_w, tile_h = tile
           ffi_draw.draw_sprite_4 x, y, w, h,
                                  path,
                                  nil, # angle
-                                 a, r, g, b, # a, r, g, b
-                                 nil, nil, nil, nil, # tile_x, tile_y, tile_w, tile_h
+                                 a, r, g, b,
+                                 tile_x, tile_y, tile_w, tile_h,
                                  nil, nil, # flip_horizontally, flip_vertically
                                  nil, nil, # angle_anchor_x, angle_anchor_y
                                  nil, nil, nil, nil, # source_x, source_y, source_w, source_h
