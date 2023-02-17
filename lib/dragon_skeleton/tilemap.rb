@@ -43,30 +43,13 @@ module DragonSkeleton
       @tileset = tileset
       @cells = grid_h.times.flat_map { |grid_y|
         grid_w.times.map { |grid_x|
-          [
-            grid_x * cell_w,
-            grid_y * cell_h,
-            nil, # path
-            nil, nil, nil, nil, # r, g, b, a
-            nil, nil, nil, nil, # tile_x, tile_y, tile_w, tile_h
-            nil # tile
-          ].tap { |cell|
-            cell.extend(Cell)
-            if tileset
-              cell.assign(tileset.default_tile)
-              tile_index = Cell.property_index(:tile)
-              cell.define_singleton_method(:tile=) do |tile|
-                assign(tileset[tile])
-                self[tile_index] = tile
-              end
-            end
-          }
+          Cell.new(grid_x * cell_w, grid_y * cell_h, tileset: tileset)
         }
       }
       @primitive = RenderedPrimitive.new(@cells, self)
     end
 
-    # Returns the cell at the given grid coordinates.
+    # Returns the Cell at the given grid coordinates.
     def [](x, y)
       @cells[y * @grid_w + x]
     end
@@ -74,29 +57,6 @@ module DragonSkeleton
     # Renders the tilemap to the given outputs / render target.
     def render(outputs)
       outputs.primitives << @primitive
-    end
-
-    module Cell # :nodoc: For extending an array with accessors for cell properties.
-      def self.array_accessors(*names)
-        @property_indexes = {}
-        names.each_with_index do |name, index|
-          @property_indexes[name] = index
-          define_method(name) { self[index] }
-          define_method("#{name}=") { |value| self[index] = value }
-        end
-      end
-
-      def self.property_index(name)
-        @property_indexes[name]
-      end
-
-      array_accessors :x, :y, :path, :r, :g, :b, :a, :tile_x, :tile_y, :tile_w, :tile_h, :tile
-
-      def assign(values)
-        values.each do |name, value|
-          self[Cell.property_index(name)] = value
-        end
-      end
     end
 
     class RenderedPrimitive # :nodoc: Internal class responsible for rendering the tilemap.

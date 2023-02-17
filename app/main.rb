@@ -9,6 +9,7 @@ require 'lib/dragon_skeleton/pathfinding/a_star.rb'
 require 'lib/dragon_skeleton/pathfinding/priority_queue.rb'
 require 'lib/dragon_skeleton/screen.rb'
 require 'lib/dragon_skeleton/tilemap.rb'
+require 'lib/dragon_skeleton/tilemap/cell.rb'
 
 
 def tick(_args); end # Placeholder file for unit tests
