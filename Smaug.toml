@@ -20,7 +20,8 @@ requires = [
   "lib/dragon_skeleton/pathfinding.rb",
   "lib/dragon_skeleton/pathfinding/a_star.rb",
   "lib/dragon_skeleton/pathfinding/priority_queue.rb",
-  "lib/dragon_skeleton/screen.rb"
+  "lib/dragon_skeleton/screen.rb",
+  "lib/dragon_skeleton/tilemap.rb"
 ]
 
 
