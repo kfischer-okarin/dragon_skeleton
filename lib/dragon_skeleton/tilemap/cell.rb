@@ -17,6 +17,9 @@ module DragonSkeleton
     # - \[9\] +tile_w+
     # - \[10\] +tile_h+
     # - \[11\] +tile+: The key of the tile to use for this cell
+    #
+    # If the Tilemap has a tileset, setting the +tile+ attribute will also update the
+    # other attributes according to the values returned by the tileset.
     class Cell < Array
       def self.index_accessors(*names) # :nodoc: Internal method used to define accessors for the cell values.
         @property_indexes = {}
