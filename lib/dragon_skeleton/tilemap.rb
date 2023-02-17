@@ -1,6 +1,14 @@
 module DragonSkeleton
   class Tilemap
+    attr_accessor :x, :y
+    attr_reader :grid_w, :grid_h, :cell_w, :cell_h
+
     def initialize(x:, y:, cell_w:, cell_h:, grid_w:, grid_h:)
+      @x = x
+      @y = y
+      @cell_w = cell_w
+      @cell_h = cell_h
+      @grid_h = grid_h
       @grid_w = grid_w
       @tiles = grid_h.times.flat_map { |grid_y|
         grid_w.times.map { |grid_x|
