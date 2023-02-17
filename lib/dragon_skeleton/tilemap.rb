@@ -53,6 +53,10 @@ module DragonSkeleton
       end
 
       array_accessors :x, :y, :path, :r, :g, :b, :a, :tile_x, :tile_y, :tile_w, :tile_h
+
+      def assign(values)
+        values.each { |name, value| send("#{name}=", value) }
+      end
     end
 
     class RenderedPrimitive # :nodoc: Internal class responsible for rendering the tilemap.
