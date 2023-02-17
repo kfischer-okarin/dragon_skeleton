@@ -49,9 +49,11 @@ module DragonSkeleton
       def draw_override(ffi_draw)
         w = @cell_w
         h = @cell_h
+        tile_count = @tiles.size
+        index = 0
 
-        @tiles.each do |tile|
-          x, y, path, r, g, b, a, tile_x, tile_y, tile_w, tile_h = tile
+        while index < tile_count
+          x, y, path, r, g, b, a, tile_x, tile_y, tile_w, tile_h = @tiles[index]
           ffi_draw.draw_sprite_4 x, y, w, h,
                                  path,
                                  nil, # angle
@@ -61,6 +63,8 @@ module DragonSkeleton
                                  nil, nil, # angle_anchor_x, angle_anchor_y
                                  nil, nil, nil, nil, # source_x, source_y, source_w, source_h
                                  nil # blendmode_enum
+
+          index += 1
         end
       end
     end
