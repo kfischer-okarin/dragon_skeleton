@@ -79,6 +79,21 @@ def test_tilemap_tileset_assigns_tile_values(_args, assert)
   assert.equal! tilemap[0, 0].tile_y, 100
 end
 
+def test_tilemap_tileset_does_not_assign_tile_values_if_same_tile(_args, assert)
+  tileset = TestTileset.new(
+    tiles: {
+      grass: { tile_x: 100, tile_y: 100 }
+    }
+  )
+  tilemap = Tilemap.new(x: 50, y: 50, cell_w: 100, cell_h: 100, grid_w: 2, grid_h: 3, tileset: tileset)
+  tilemap[0, 0].tile = :grass
+  tilemap[0, 0].tile_x = 999
+
+  tilemap[0, 0].tile = :grass
+
+  assert.equal! tilemap[0, 0].tile_x, 999
+end
+
 class Spy
   attr_reader :calls
 
