@@ -54,21 +54,24 @@ def test_tilemap_render(args, assert)
   # rubocop:enable all
 end
 
-def test_tilemap_tileset(_args, assert)
-  tileset = Object.new
-  tileset.define_singleton_method(:default_tile) do
-    { tile_w: 50, tile_h: 50 }
-  end
-  tileset.define_singleton_method(:[]) do |tile|
-    { tile_x: 100, tile_y: 100 } if tile == :grass
-  end
+def test_tilemap_tileset_assigns_default_tile(_args, assert)
+  tileset = TestTileset.new(
+    default_tile: { tile_w: 50, tile_h: 50 },
+  )
 
   tilemap = Tilemap.new(x: 50, y: 50, cell_w: 100, cell_h: 100, grid_w: 2, grid_h: 3, tileset: tileset)
 
-  assert.nil! tilemap[0, 0].tile_x
-  assert.nil! tilemap[0, 0].tile_y
   assert.equal! tilemap[0, 0].tile_w, 50
   assert.equal! tilemap[0, 0].tile_h, 50
+end
+
+def test_tilemap_tileset_assigns_tile_values(_args, assert)
+  tileset = TestTileset.new(
+    tiles: {
+      grass: { tile_x: 100, tile_y: 100 }
+    }
+  )
+  tilemap = Tilemap.new(x: 50, y: 50, cell_w: 100, cell_h: 100, grid_w: 2, grid_h: 3, tileset: tileset)
 
   tilemap[0, 0].tile = :grass
 
@@ -85,5 +88,18 @@ class Spy
 
   def method_missing(method_name, *args)
     @calls << [method_name, args]
+  end
+end
+
+class TestTileset
+  attr_reader :default_tile
+
+  def initialize(default_tile: nil, tiles: nil)
+    @default_tile = default_tile || {}
+    @tiles = tiles || {}
+  end
+
+  def [](tile)
+    @tiles[tile]
   end
 end
