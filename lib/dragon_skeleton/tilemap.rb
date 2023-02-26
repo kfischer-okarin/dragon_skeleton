@@ -15,13 +15,13 @@ module DragonSkeleton
     # The y coordinate of the bottom left corner of the tilemap
     attr_accessor :y
     # The width of each cell in the tilemap
-    attr_reader :grid_w
-    # The height of each cell in the tilemap
-    attr_reader :grid_h
-    # The width of the tilemap in cells
     attr_reader :cell_w
-    # The height of the tilemap in cells
+    # The height of each cell in the tilemap
     attr_reader :cell_h
+    # The width of the tilemap in cells
+    attr_reader :grid_w
+    # The height of the tilemap in cells
+    attr_reader :grid_h
 
     # Creates a new tilemap.
     #
