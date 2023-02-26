@@ -59,6 +59,24 @@ module DragonSkeleton
       outputs.primitives << @primitive
     end
 
+    # Converts a position to grid coordinates.
+    def to_grid_coordinates(position)
+      {
+        x: (position.x - @x).idiv(@cell_w),
+        y: (position.y - @y).idiv(@cell_h)
+      }
+    end
+
+    # Returns the rectangle of the cell at the given grid coordinates.
+    def cell_rect(grid_coordinates)
+      {
+        x: @x + (grid_coordinates.x * @cell_w),
+        y: @y + (grid_coordinates.y * @cell_h),
+        w: @cell_w,
+        h: @cell_h
+      }
+    end
+
     class RenderedPrimitive # :nodoc: Internal class responsible for rendering the tilemap.
       def initialize(cells, tilemap)
         @cells = cells

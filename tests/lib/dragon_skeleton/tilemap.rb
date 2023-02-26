@@ -54,6 +54,18 @@ def test_tilemap_render(args, assert)
   # rubocop:enable all
 end
 
+def test_tilemap_to_grid_coordinates(_args, assert)
+  tilemap = Tilemap.new(x: 50, y: 50, cell_w: 100, cell_h: 100, grid_w: 2, grid_h: 3)
+
+  assert.equal! tilemap.to_grid_coordinates({ x: 55, y: 55 }), { x: 0, y: 0 }
+end
+
+def test_tilemap_cell_rect(_args, assert)
+  tilemap = Tilemap.new(x: 50, y: 50, cell_w: 100, cell_h: 100, grid_w: 2, grid_h: 3)
+
+  assert.equal! tilemap.cell_rect({ x: 1, y: 2 }), { x: 150, y: 250, w: 100, h: 100 }
+end
+
 def test_tilemap_tileset_assigns_default_tile(_args, assert)
   tileset = TestTileset.new(
     default_tile: { tile_w: 50, tile_h: 50 },
