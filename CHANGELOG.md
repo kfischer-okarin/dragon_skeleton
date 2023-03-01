@@ -3,6 +3,14 @@
 This project does **not** use Semantic Versioning but just has versions tagged with the date when they were released.
 Otherwise it more or less follows [Common Changelog] format.
 
+## [2023.03.01.1]
+
+### Added
+- Added `Tilemap#to_grid_coordinates` and `Tilemap#cell_rect` methods (cfeec2c)
+
+### Fixed
+- Fixed swapped documentation for `Tilemap` attributes (d46347d)
+
 ## [2023.02.23.1]
 
 ### Changed
@@ -66,3 +74,4 @@ Otherwise it more or less follows [Common Changelog] format.
 [2023.02.17.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.02.17.1
 [2023.02.17.2]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.02.17.2
 [2023.02.23.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.02.23.1
+[2023.03.01.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.03.01.1
