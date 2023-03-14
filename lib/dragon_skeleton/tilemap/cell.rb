@@ -64,7 +64,10 @@ module DragonSkeleton
       #   cell.assign(path: 'sprites/box.png', r: 255, g: 0, b: 0)
       def assign(values)
         values.each do |name, value|
-          self[Cell.property_index(name)] = value
+          index = Cell.property_index(name)
+          next unless index
+
+          self[index] = value
         end
       end
     end

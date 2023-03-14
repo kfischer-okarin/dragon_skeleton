@@ -98,7 +98,7 @@ def test_tilemap_tileset_assigns_tile_values(_args, assert)
   assert.equal! tilemap[0, 0].tile_y, 100
 end
 
-def test_tilemap_tileset_does_not_assign_tile_values_if_same_tile(_args, assert)
+def test_tilemap_cell_does_not_assign_tile_values_if_same_tile(_args, assert)
   tileset = TestTileset.new(
     tiles: {
       grass: { tile_x: 100, tile_y: 100 }
@@ -111,6 +111,13 @@ def test_tilemap_tileset_does_not_assign_tile_values_if_same_tile(_args, assert)
   tilemap[0, 0].tile = :grass
 
   assert.equal! tilemap[0, 0].tile_x, 999
+end
+
+def test_tilemap_cell_ignores_unknown_tile_values_when_assigning(_args, assert)
+  tilemap = Tilemap.new(x: 50, y: 50, cell_w: 100, cell_h: 100, grid_w: 2, grid_h: 3)
+  tilemap[0, 0].assign(tile_x: 100, score: 100)
+
+  assert.ok! # no error
 end
 
 class Spy
