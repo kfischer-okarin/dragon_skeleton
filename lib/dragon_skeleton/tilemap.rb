@@ -49,6 +49,16 @@ module DragonSkeleton
       @primitive = RenderedPrimitive.new(@cells, self)
     end
 
+    # Returns the width of the tilemap in pixels.
+    def w
+      @grid_w * @cell_w
+    end
+
+    # Returns the height of the tilemap in pixels.
+    def h
+      @grid_h * @cell_h
+    end
+
     # Returns the Cell at the given grid coordinates.
     def [](x, y)
       @cells[y * @grid_w + x]

@@ -66,6 +66,13 @@ def test_tilemap_cell_rect(_args, assert)
   assert.equal! tilemap.cell_rect({ x: 1, y: 2 }), { x: 150, y: 250, w: 100, h: 100 }
 end
 
+def test_tilemap_w_h(_args, assert)
+  tilemap = Tilemap.new(x: 50, y: 50, cell_w: 100, cell_h: 100, grid_w: 2, grid_h: 3)
+
+  assert.equal! tilemap.w, 200
+  assert.equal! tilemap.h, 300
+end
+
 def test_tilemap_tileset_assigns_default_tile(_args, assert)
   tileset = TestTileset.new(
     default_tile: { tile_w: 50, tile_h: 50 },
