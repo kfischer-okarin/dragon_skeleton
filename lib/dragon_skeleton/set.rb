@@ -1,6 +1,13 @@
 module DragonSkeleton
   # Mostly implements the Set class from the Ruby standard library.
   # See https://ruby-doc.org/3.2.2/stdlibs/set/Set.html
+  #
+  # Following methods are not implemented:
+  # - +compare_by_identity+
+  # - +compare_by_identity?+
+  # - +reset+
+  # - +to_set+
+  # - +Enumerable#to_set+
   class Set
     include Enumerable
 
