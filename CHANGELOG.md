@@ -3,6 +3,11 @@
 This project does **not** use Semantic Versioning but just has versions tagged with the date when they were released.
 Otherwise it more or less follows [Common Changelog] format.
 
+## [2023.04.04.1]
+
+### Added
+- Added `Set`
+
 ## [2023.03.14.1]
 
 ### Added
@@ -84,3 +89,4 @@ Otherwise it more or less follows [Common Changelog] format.
 [2023.02.23.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.02.23.1
 [2023.03.01.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.03.01.1
 [2023.03.14.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.03.14.1
+[2023.04.04.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.04.04.1
