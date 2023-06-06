@@ -1,0 +1,82 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'fileutils'
+require 'pathname'
+
+LIB_DIR = Pathname.new('lib/dragon_skeleton')
+OUTPUT_DIR = Pathname.new('dist')
+
+LIBS = {
+  animations: [
+    'animations.rb',
+    'file_formats/aseprite_json.rb'
+  ],
+  buttons: [
+    'buttons.rb'
+  ],
+  long_calculation: [
+    'long_calculation.rb',
+    'long_calculation/long_calculation_fiber.rb'
+  ],
+  pathfinding: [
+    'pathfinding.rb',
+    'pathfinding/a_star.rb',
+    'pathfinding/priority_queue.rb'
+  ],
+  screen: [
+    'screen.rb'
+  ],
+  set: [
+    'set.rb'
+  ],
+  tilemap: [
+    'tilemap.rb',
+    'tilemap/cell.rb'
+  ]
+}.freeze
+
+NEWLINE = "\n"
+
+def main
+  prepare_output_directory
+  license_header_lines = comment_lines File.readlines('LICENSE')
+  license_header_lines << NEWLINE
+
+  LIBS.each do |lib_name, lib_files|
+    result_lines = license_header_lines.dup
+    lib_files.each do |lib_file|
+      file_lines = File.readlines(LIB_DIR / lib_file)
+      result_lines.concat strip_dragon_skeleton_module(file_lines)
+      result_lines << NEWLINE
+    end
+
+    File.write OUTPUT_DIR / "#{lib_name}.rb", result_lines.join.chomp
+  end
+end
+
+def prepare_output_directory
+  FileUtils.rm_rf OUTPUT_DIR
+  FileUtils.mkdir_p OUTPUT_DIR
+end
+
+def read_license_header
+  result = as_commented_lines File.read('LICENSE')
+  result << "\n"
+  result
+end
+
+def comment_lines(lines)
+  lines.map { |line| "# #{line}" }
+end
+
+def strip_dragon_skeleton_module(file_lines)
+  lines_without_module_and_end = file_lines[1..-2]
+  unindent lines_without_module_and_end
+end
+
+def unindent(lines)
+  lines.map { |line| line[2..] }
+end
+
+main if $PROGRAM_NAME == __FILE__
