@@ -1,5 +1,7 @@
 # Dragon Skeleton
 
+Single File Libraries are available at https://github.com/kfischer-okarin/dragon_skeleton_single_files/
+
 ## Development
 
 ### Generate Documentation
