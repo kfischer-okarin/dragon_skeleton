@@ -45,6 +45,7 @@ module DragonSkeleton
         result = args.outputs[:screen]
         result.width = screen[:x_resolution]
         result.height = screen[:y_resolution]
+        result.transient!
         result
       end
 
