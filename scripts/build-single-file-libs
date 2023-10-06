@@ -60,12 +60,6 @@ def prepare_output_directory
   FileUtils.mkdir_p OUTPUT_DIR
 end
 
-def read_license_header
-  result = as_commented_lines File.read('LICENSE')
-  result << "\n"
-  result
-end
-
 def comment_lines(lines)
   lines.map { |line| "# #{line}" }
 end
