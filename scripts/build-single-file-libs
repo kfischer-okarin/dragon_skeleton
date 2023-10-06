@@ -36,22 +36,22 @@ LIBS = {
   ]
 }.freeze
 
-NEWLINE = "\n"
+EMPTY_LINE = "\n"
 
 def main
   prepare_output_directory
   license_header_lines = comment_lines File.readlines('LICENSE')
-  license_header_lines << NEWLINE
+  license_header_lines << EMPTY_LINE
 
   LIBS.each do |lib_name, lib_files|
     result_lines = license_header_lines.dup
     lib_files.each do |lib_file|
       file_lines = File.readlines(LIB_DIR / lib_file)
       result_lines.concat strip_dragon_skeleton_module(file_lines)
-      result_lines << NEWLINE
+      result_lines << EMPTY_LINE
     end
 
-    File.write OUTPUT_DIR / "#{lib_name}.rb", result_lines.join.chomp
+    File.write OUTPUT_DIR / "#{lib_name}.rb", result_lines.join
   end
 end
 
@@ -61,7 +61,13 @@ def prepare_output_directory
 end
 
 def comment_lines(lines)
-  lines.map { |line| "# #{line}" }
+  lines.map { |line|
+    if line.strip.empty?
+      "#\n"
+    else
+      "# #{line}"
+    end
+  }
 end
 
 def strip_dragon_skeleton_module(file_lines)
@@ -70,7 +76,13 @@ def strip_dragon_skeleton_module(file_lines)
 end
 
 def unindent(lines)
-  lines.map { |line| line[2..] }
+  lines.map { |line|
+    if line.strip.empty?
+      EMPTY_LINE
+    else
+      line[2..]
+    end
+  }
 end
 
 main if $PROGRAM_NAME == __FILE__
