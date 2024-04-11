@@ -3,11 +3,12 @@
 This project does **not** use Semantic Versioning but just has versions tagged with the date when they were released.
 Otherwise it more or less follows [Common Changelog] format.
 
-## Next Version
+## [2024.04.11.1]
 
 ### Changed
 - **Tilemap**: Only render tiles when a `path` is set on the cell (4c25434)
 - **Tilemap**: Reset `path` when `nil` is assigned as tile (8c9be89)
+- **LongCalculation**: Improve performance by moving yield checks inside Fiber (5088614)
 
 ### Fixed
 - **Pathfinding**: Return empty path if no path could be found (a839cee)
@@ -105,3 +106,4 @@ Otherwise it more or less follows [Common Changelog] format.
 [2023.03.14.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.03.14.1
 [2023.04.04.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.04.04.1
 [2023.10.06.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2023.10.06.1
+[2024.04.11.1]: https://github.com/kfischer-okarin/dragon_skeleton/releases/tag/2024.04.11.1
