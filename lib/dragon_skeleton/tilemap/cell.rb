@@ -49,10 +49,16 @@ module DragonSkeleton
 
         assign(tileset.default_tile)
         tile_index = Cell.property_index(:tile)
+        path_index = Cell.property_index(:path)
         define_singleton_method(:tile=) do |tile|
           return unless self[tile_index] != tile
 
-          assign(tileset[tile])
+          if tile
+            assign(tileset[tile])
+          else
+            self[path_index] = nil
+          end
+
           self[tile_index] = tile
         end
       end

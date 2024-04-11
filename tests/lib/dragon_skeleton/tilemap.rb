@@ -91,6 +91,19 @@ def test_tilemap_cell_does_not_assign_tile_values_if_same_tile(_args, assert)
   assert.equal! tilemap[0, 0].tile_x, 999
 end
 
+def test_tilemap_cell_resets_path_when_assigning_nil_as_tile(_args, assert)
+  tileset = TestTileset.new(
+    tiles: {
+      grass: { path: 'grass.png' }
+    }
+  )
+  tilemap = Tilemap.new(x: 50, y: 50, cell_w: 100, cell_h: 100, grid_w: 2, grid_h: 3, tileset: tileset)
+  tilemap[0, 0].tile = :grass
+  tilemap[0, 0].tile = nil
+
+  assert.nil! tilemap[0, 0].path
+end
+
 def test_tilemap_cell_ignores_unknown_tile_values_when_assigning(_args, assert)
   tilemap = Tilemap.new(x: 50, y: 50, cell_w: 100, cell_h: 100, grid_w: 2, grid_h: 3)
   tilemap[0, 0].assign(tile_x: 100, score: 100)
