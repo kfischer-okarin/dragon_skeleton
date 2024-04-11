@@ -43,7 +43,9 @@ module DragonSkeleton
       # LongCalculationFiber#resume method is called on the calculation.
       def finish_step
         return unless inside_calculation?
+        return unless Fiber.current.yield_strategy.should_yield?
 
+        Fiber.current.yield_strategy = nil
         Fiber.yield
       end
 
