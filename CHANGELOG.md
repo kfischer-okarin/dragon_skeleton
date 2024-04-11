@@ -6,39 +6,39 @@ Otherwise it more or less follows [Common Changelog] format.
 ## [2023.10.06.1]
 
 ### Fixed
-- `Screen` will not produce a transient render target (b6db892)
+- **Screen**: `Screen` will not produce a transient render target (b6db892)
 
 ## [2023.04.04.1]
 
 ### Added
-- Added `Set`
+- **Set**: Added `Set`
 
 ## [2023.03.14.1]
 
 ### Added
-- Added `Tilemap#w` and `Tilemap#h`
+- **Tilemap**: Added `Tilemap#w` and `Tilemap#h`
 
 ### Fixed
-- Ignore unknown properties passed to `Tilemap::Cell#assign` instead of raising an error
+- **Tilemap**: Ignore unknown properties passed to `Tilemap::Cell#assign` instead of raising an error
 
 ## [2023.03.01.1]
 
 ### Added
-- Added `Tilemap#to_grid_coordinates` and `Tilemap#cell_rect` methods (cfeec2c)
+- **Tilemap**: Added `Tilemap#to_grid_coordinates` and `Tilemap#cell_rect` methods (cfeec2c)
 
 ### Fixed
-- Fixed swapped documentation for `Tilemap` attributes (d46347d)
+- **Tilemap**: Fixed swapped documentation for `Tilemap` attributes (d46347d)
 
 ## [2023.02.23.1]
 
 ### Changed
-- Skip value assignment if assigned tile id is same as before (2e8cc63)
+- **Tilemap**: Skip value assignment if assigned tile id is same as before (2e8cc63)
 
 ## [2023.02.17.2]
 
 ### Added
-- Added `assign` method to `Tilemap` cell for multi assignment of several properties (5347f35)
-- Allow specifying a tileset object which associates tile ids with attributes to assign to a cell (4482b2f)
+- **Tilemap**: Added `assign` method to `Tilemap` cell for multi assignment of several properties (5347f35)
+- **Tilemap**: Allow specifying a tileset object which associates tile ids with attributes to assign to a cell (4482b2f)
 
 ## [2023.02.17.1]
 
