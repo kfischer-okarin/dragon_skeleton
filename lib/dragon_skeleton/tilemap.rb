@@ -107,16 +107,18 @@ module DragonSkeleton
         index = 0
 
         while index < cell_count
-          x, y, path, r, g, b, a, tile_x, tile_y, tile_w, tile_h = cells[index]
-          ffi_draw.draw_sprite_4 origin_x + x, origin_y + y, w, h,
-                                 path,
-                                 nil, # angle
-                                 a, r, g, b,
-                                 tile_x, tile_y, tile_w, tile_h,
-                                 nil, nil, # flip_horizontally, flip_vertically
-                                 nil, nil, # angle_anchor_x, angle_anchor_y
-                                 nil, nil, nil, nil, # source_x, source_y, source_w, source_h
-                                 nil # blendmode_enum
+          x, y, path, r, g, b, a, tile_x, tile_y, tile_w, tile_h, tile = cells[index]
+          if path
+            ffi_draw.draw_sprite_4 origin_x + x, origin_y + y, w, h,
+                                   path,
+                                   nil, # angle
+                                   a, r, g, b,
+                                   tile_x, tile_y, tile_w, tile_h,
+                                   nil, nil, # flip_horizontally, flip_vertically
+                                   nil, nil, # angle_anchor_x, angle_anchor_y
+                                   nil, nil, nil, nil, # source_x, source_y, source_w, source_h
+                                   nil # blendmode_enum
+          end
 
           index += 1
         end
