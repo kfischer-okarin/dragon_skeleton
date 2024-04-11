@@ -41,6 +41,7 @@ module DragonSkeleton
             cost_so_far[neighbor] = total_cost_to_neighbor
           end
         end
+        return [] unless came_from.key? goal
 
         result = []
         current = goal

@@ -19,6 +19,22 @@ def test_pathfinding_a_star(_args, assert)
   ]
 end
 
+def test_pathfinding_a_star_start_and_goal_is_same(_args, assert)
+  graph = PathfindingTestHelper.build_graph <<~GRID
+    5 1
+  GRID
+  pathfinder = Pathfinding::AStar.new(graph, heuristic: Pathfinding::MANHATTAN_DISTANCE)
+
+  assert.equal! pathfinder.find_path({ x: 0, y: 0 }, { x: 0, y: 0 }), [{ x: 0, y: 0 }]
+end
+
+def test_pathfinding_a_star_no_path(_args, assert)
+  graph = { a: [{ to: :b, cost: 1 }], b: [{ to: :a, cost: 1 }], c: [] }
+  pathfinder = Pathfinding::AStar.new(graph, heuristic: ->(_, _) { 0 })
+
+  assert.equal! pathfinder.find_path(:a, :c), []
+end
+
 module PathfindingTestHelper
   class << self
     def build_graph(string)
