@@ -3,6 +3,15 @@
 This project does **not** use Semantic Versioning but just has versions tagged with the date when they were released.
 Otherwise it more or less follows [Common Changelog] format.
 
+## Next Version
+
+### Changed
+- **Tilemap**: Only render tiles when a `path` is set on the cell (4c25434)
+- **Tilemap**: Reset `path` when `nil` is assigned as tile (8c9be89)
+
+### Fixed
+- **Pathfinding**: Return empty path if no path could be found (a839cee)
+
 ## [2023.10.06.1]
 
 ### Fixed
