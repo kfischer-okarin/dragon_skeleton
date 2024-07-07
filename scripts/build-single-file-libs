@@ -4,7 +4,7 @@
 require 'fileutils'
 require 'pathname'
 
-LIB_DIR = Pathname.new('lib/dragon_skeleton')
+LIB_DIR = Pathname.new('lib')
 OUTPUT_DIR = Pathname.new('dist')
 
 LIBS = {
@@ -47,7 +47,7 @@ def main
     result_lines = license_header_lines.dup
     lib_files.each do |lib_file|
       file_lines = File.readlines(LIB_DIR / lib_file)
-      result_lines.concat strip_dragon_skeleton_module(file_lines)
+      result_lines.concat file_lines
       result_lines << EMPTY_LINE
     end
 
@@ -66,21 +66,6 @@ def comment_lines(lines)
       "#\n"
     else
       "# #{line}"
-    end
-  }
-end
-
-def strip_dragon_skeleton_module(file_lines)
-  lines_without_module_and_end = file_lines[1..-2]
-  unindent lines_without_module_and_end
-end
-
-def unindent(lines)
-  lines.map { |line|
-    if line.strip.empty?
-      EMPTY_LINE
-    else
-      line[2..]
     end
   }
 end
