@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Script is in mygame/scripts -> go to DR directory
+cd $(dirname $0)/../../
+
+./dragonruby mygame --test tests/main.rb
