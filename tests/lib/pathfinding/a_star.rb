@@ -1,5 +1,3 @@
-DragonSkeleton.add_to_top_level_namespace
-
 def test_pathfinding_a_star(_args, assert)
   graph = PathfindingTestHelper.build_graph <<~GRID
     5 1 1 1 1

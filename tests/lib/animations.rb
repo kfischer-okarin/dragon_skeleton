@@ -1,5 +1,3 @@
-DragonSkeleton.add_to_top_level_namespace
-
 def test_animations_integration_test(_args, assert)
   animation = Animations.build(
     frames: [

@@ -1,5 +1,3 @@
-DragonSkeleton.add_to_top_level_namespace
-
 def test_priority_queue(_args, assert)
   queue = Pathfinding::PriorityQueue.new
   queue.insert :five, 5

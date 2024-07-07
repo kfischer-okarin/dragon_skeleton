@@ -1,5 +1,3 @@
-DragonSkeleton.add_to_top_level_namespace
-
 def test_long_calculation_basic_behaviour(_args, assert)
   progress = []
   calculation = LongCalculation.define do

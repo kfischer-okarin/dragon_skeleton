@@ -1,5 +1,3 @@
-DragonSkeleton.add_to_top_level_namespace
-
 def test_file_formats_aseprite_json_read_as_animations(_args, assert)
   animations = FileFormats::AsepriteJson.read_as_animations 'tests/resources/character.json'
   expected_animations = {

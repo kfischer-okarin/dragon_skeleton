@@ -1,5 +1,3 @@
-DragonSkeleton.add_to_top_level_namespace
-
 def test_buttons_handle_mouse_input_hovered(args, assert)
   button = { x: 100, y: 100, w: 100, h: 100 }
   mouse = args.inputs.mouse

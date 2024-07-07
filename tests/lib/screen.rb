@@ -1,5 +1,3 @@
-DragonSkeleton.add_to_top_level_namespace
-
 def test_screen_build_render_target(args, assert)
   screen = Screen.with_resolution(320, 180)
 

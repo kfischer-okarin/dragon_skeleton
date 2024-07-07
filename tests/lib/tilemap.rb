@@ -1,5 +1,3 @@
-DragonSkeleton.add_to_top_level_namespace
-
 def test_tilemap_render_renders_tiles_with_path(args, assert)
   tilemap = Tilemap.new(x: 50, y: 50, cell_w: 100, cell_h: 100, grid_w: 2, grid_h: 3)
   tilemap[0, 0].path = 'tile.png'

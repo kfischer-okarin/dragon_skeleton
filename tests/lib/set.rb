@@ -1,5 +1,3 @@
-DragonSkeleton.add_to_top_level_namespace
-
 def test_set_union(_args, assert)
   assert.equal! Set[1, 2, 3] | Set[2, 3, 4], Set[1, 2, 3, 4]
   assert.equal! Set[1, 2, 3].union(Set[4, 5, 6]), Set[1, 2, 3, 4, 5, 6]
